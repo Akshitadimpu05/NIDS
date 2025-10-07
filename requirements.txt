@@ -1,0 +1,51 @@
+# Deep Learning and ML
+torch>=2.0.0
+torchvision>=0.15.0
+tensorflow>=2.13.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Reinforcement Learning
+stable-baselines3>=2.0.0
+gymnasium>=0.28.0
+tensorboard>=2.13.0
+
+# Network Traffic Analysis
+scapy>=2.5.0
+pyshark>=0.6.0
+netfilterqueue>=1.1.0
+
+# Data Processing and Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+dash>=2.10.0
+
+# API and Communication
+fastapi>=0.100.0
+uvicorn>=0.22.0
+websockets>=11.0
+requests>=2.31.0
+aiohttp>=3.8.0
+
+# Docker and Containerization
+docker>=6.1.0
+
+# Utilities
+pyyaml>=6.0
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+joblib>=1.3.0
+psutil>=5.9.0
+
+# Logging and Monitoring
+loguru>=0.7.0
+prometheus-client>=0.17.0
+
+# Cryptography (for encrypted traffic handling)
+cryptography>=41.0.0
+
+# Time series and statistical analysis
+scipy>=1.11.0
+statsmodels>=0.14.0

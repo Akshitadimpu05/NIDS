@@ -1,0 +1,35 @@
+# Dockerfile for Traffic Generator
+FROM python:3.9-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libpcap-dev \
+    tcpdump \
+    hping3 \
+    nmap \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy source code
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+# Create non-root user for security
+RUN useradd -m -u 1000 generator && chown -R generator:generator /app
+USER generator
+
+# Default command
+CMD ["python", "scripts/generate_traffic.py"]

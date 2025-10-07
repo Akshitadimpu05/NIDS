@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  # Central Orchestrator
+  orchestrator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.orchestrator
+    container_name: nids-orchestrator
+    ports:
+      - "8000:8000"
+    environment:
+      - ORCHESTRATOR_HOST=0.0.0.0
+      - ORCHESTRATOR_PORT=8000
+      - LOG_LEVEL=INFO
+    volumes:
+      - orchestrator_data:/app/data
+      - orchestrator_logs:/app/logs
+    networks:
+      - nids-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Fog Node 1
+  fog-node-1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.fog-node
+    container_name: nids-fog-node-1
+    environment:
+      - NODE_ID=fog-node-1
+      - ORCHESTRATOR_URL=http://orchestrator:8000
+      - CAPTURE_INTERFACE=eth0
+      - LOG_LEVEL=INFO
+      - ENABLE_MITIGATION=false  # Disable for container environment
+    volumes:
+      - fog_node_1_data:/app/data
+      - fog_node_1_logs:/app/logs
+    networks:
+      - nids-network
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN  # Required for traffic capture
+    privileged: false
+
+  # Fog Node 2
+  fog-node-2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.fog-node
+    container_name: nids-fog-node-2
+    environment:
+      - NODE_ID=fog-node-2
+      - ORCHESTRATOR_URL=http://orchestrator:8000
+      - CAPTURE_INTERFACE=eth0
+      - LOG_LEVEL=INFO
+      - ENABLE_MITIGATION=false
+    volumes:
+      - fog_node_2_data:/app/data
+      - fog_node_2_logs:/app/logs
+    networks:
+      - nids-network
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    privileged: false
+
+  # Fog Node 3
+  fog-node-3:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.fog-node
+    container_name: nids-fog-node-3
+    environment:
+      - NODE_ID=fog-node-3
+      - ORCHESTRATOR_URL=http://orchestrator:8000
+      - CAPTURE_INTERFACE=eth0
+      - LOG_LEVEL=INFO
+      - ENABLE_MITIGATION=false
+    volumes:
+      - fog_node_3_data:/app/data
+      - fog_node_3_logs:/app/logs
+    networks:
+      - nids-network
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    privileged: false
+
+  # Traffic Generator (for testing)
+  traffic-generator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.traffic-generator
+    container_name: nids-traffic-generator
+    environment:
+      - TARGET_NETWORKS=nids-network
+      - GENERATION_RATE=100  # packets per second
+      - ATTACK_PROBABILITY=0.1  # 10% attack traffic
+    networks:
+      - nids-network
+    depends_on:
+      - fog-node-1
+      - fog-node-2
+      - fog-node-3
+    restart: unless-stopped
+
+  # Monitoring Dashboard (optional)
+  dashboard:
+    image: grafana/grafana:latest
+    container_name: nids-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - nids-network
+    restart: unless-stopped
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: nids-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - nids-network
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+
+networks:
+  nids-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  orchestrator_data:
+  orchestrator_logs:
+  fog_node_1_data:
+  fog_node_1_logs:
+  fog_node_2_data:
+  fog_node_2_logs:
+  fog_node_3_data:
+  fog_node_3_logs:
+  grafana_data:
+  prometheus_data:
