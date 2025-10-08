@@ -80,30 +80,57 @@ class DataPreprocessor:
         Load and preprocess CIC-Darknet2020 dataset.
         
         Args:
-            data_path: Path to the dataset directory
+            data_path: Path to the dataset file or directory
             
         Returns:
             Tuple of (features_df, labels_df)
         """
         logger.info(f"Loading CIC-Darknet2020 dataset from {data_path}")
         
-        # Find CSV files in the directory
         csv_files = []
-        for root, dirs, files in os.walk(data_path):
-            for file in files:
-                if file.endswith('.csv'):
-                    csv_files.append(os.path.join(root, file))
+        
+        # Check if data_path is a file or directory
+        if os.path.isfile(data_path):
+            # Single CSV file
+            if data_path.endswith('.csv') or data_path.endswith('.CSV'):
+                csv_files.append(data_path)
+            else:
+                raise ValueError(f"File {data_path} is not a CSV file")
+        elif os.path.isdir(data_path):
+            # Directory - find CSV files in the directory
+            for root, dirs, files in os.walk(data_path):
+                for file in files:
+                    if file.lower().endswith('.csv'):
+                        csv_files.append(os.path.join(root, file))
+        else:
+            raise FileNotFoundError(f"Path {data_path} does not exist")
         
         if not csv_files:
             raise FileNotFoundError(f"No CSV files found in {data_path}")
+        
+        logger.info(f"Found {len(csv_files)} CSV file(s) to load")
         
         # Load and combine all CSV files
         dataframes = []
         for csv_file in csv_files:
             try:
-                df = pd.read_csv(csv_file, low_memory=False)
+                # Load CSV with error handling for malformed rows
+                logger.info(f"Loading {csv_file}...")
+                df = pd.read_csv(csv_file, low_memory=False, on_bad_lines='skip')
+                
+                # Clean up duplicate columns (like Label,Label)
+                if 'Label' in df.columns:
+                    # Keep only the first Label column if there are duplicates
+                    label_cols = [col for col in df.columns if col == 'Label']
+                    if len(label_cols) > 1:
+                        # Drop duplicate label columns except the first
+                        cols_to_drop = label_cols[1:]
+                        df = df.drop(columns=cols_to_drop)
+                        logger.info(f"Removed {len(cols_to_drop)} duplicate Label columns")
+                
                 dataframes.append(df)
-                logger.info(f"Loaded {len(df)} samples from {csv_file}")
+                logger.info(f"Successfully loaded {len(df)} samples from {csv_file}")
+                
             except Exception as e:
                 logger.warning(f"Failed to load {csv_file}: {e}")
         
@@ -125,7 +152,24 @@ class DataPreprocessor:
             features_df = combined_df.iloc[:, :-1]
             labels_df = combined_df.iloc[:, -1]
         
+        # Filter out non-numeric columns (Flow ID, IPs, timestamps, etc.)
+        numeric_columns = []
+        non_numeric_columns = []
+        
+        for col in features_df.columns:
+            try:
+                # Try to convert to numeric
+                pd.to_numeric(features_df[col], errors='raise')
+                numeric_columns.append(col)
+            except (ValueError, TypeError):
+                non_numeric_columns.append(col)
+        
+        if non_numeric_columns:
+            logger.info(f"Removing {len(non_numeric_columns)} non-numeric columns: {non_numeric_columns[:5]}...")
+            features_df = features_df[numeric_columns]
+        
         logger.info(f"Features shape: {features_df.shape}, Labels shape: {labels_df.shape}")
+        logger.info(f"Using {len(numeric_columns)} numeric features for training")
         
         return features_df, labels_df
     
@@ -172,17 +216,40 @@ class DataPreprocessor:
         
         logger.info(f"Preprocessing features with shape: {features_array.shape}")
         
-        # Handle missing values
+        # Clean data: handle infinite values, NaN, and extremely large numbers
+        logger.info("Cleaning data - handling infinite values and outliers...")
+        
+        # Check for infinite and NaN values
+        inf_count = np.isinf(features_array).sum()
+        nan_count = np.isnan(features_array).sum()
+        if inf_count > 0:
+            logger.warning(f"Found {inf_count} infinite values, replacing...")
+        if nan_count > 0:
+            logger.warning(f"Found {nan_count} NaN values, replacing...")
+        
+        # Replace infinite and NaN values
+        features_array = np.nan_to_num(features_array, 
+                                     nan=0.0, 
+                                     posinf=1e10,  # Use smaller max value
+                                     neginf=-1e10)
+        
+        # Clip extremely large values to prevent overflow
+        features_array = np.clip(features_array, -1e15, 1e15)
+        
+        # Check for any remaining problematic values
+        if np.any(np.isinf(features_array)) or np.any(np.isnan(features_array)):
+            logger.error("Still have infinite or NaN values after cleaning!")
+            # Force replace any remaining problematic values
+            features_array[np.isinf(features_array)] = 0.0
+            features_array[np.isnan(features_array)] = 0.0
+        
+        logger.info("Data cleaning completed")
+        
+        # Handle missing values with imputer
         if self.imputer and fit:
             features_array = self.imputer.fit_transform(features_array)
         elif self.imputer:
             features_array = self.imputer.transform(features_array)
-        
-        # Remove infinite values
-        features_array = np.nan_to_num(features_array, 
-                                     nan=0.0, 
-                                     posinf=np.finfo(np.float32).max,
-                                     neginf=np.finfo(np.float32).min)
         
         # Feature selection
         if self.feature_selection and fit:

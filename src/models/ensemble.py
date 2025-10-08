@@ -11,8 +11,15 @@ import logging
 
 from .autoencoder import TrafficAutoencoder
 from .capsnet import CapsuleNetwork
-from ..agents.ppo_agent import PPOAgent
-from ..agents.environment import NIDSEnvironment, TrafficAction
+
+# Use absolute imports to avoid relative import issues
+try:
+    from src.agents.ppo_agent import PPOAgent
+    from src.agents.environment import NIDSEnvironment, TrafficAction
+except ImportError:
+    # Fallback for when running from different contexts
+    from agents.ppo_agent import PPOAgent
+    from agents.environment import NIDSEnvironment, TrafficAction
 
 logger = logging.getLogger(__name__)
 
@@ -90,16 +97,21 @@ class HybridNIDSModel:
         
     def _initialize_models(self):
         """Initialize all component models."""
-        # Autoencoder
+        # Autoencoder - only pass constructor parameters
+        ae_model_params = ['hidden_dims', 'latent_dim', 'dropout_rate']
+        ae_config = {k: v for k, v in self.ae_config.items() if k in ae_model_params}
         self.autoencoder = TrafficAutoencoder(
             input_dim=self.input_dim,
-            **self.ae_config
+            **ae_config
         ).to(self.device)
         
-        # Capsule Network
+        # Capsule Network - only pass constructor parameters  
+        capsnet_model_params = ['primary_caps_dim', 'primary_caps_num', 'digit_caps_dim', 
+                               'digit_caps_num', 'routing_iterations']
+        capsnet_config = {k: v for k, v in self.capsnet_config.items() if k in capsnet_model_params}
         self.capsnet = CapsuleNetwork(
             input_dim=self.input_dim,
-            **self.capsnet_config
+            **capsnet_config
         ).to(self.device)
         
         # RL Environment and Agent

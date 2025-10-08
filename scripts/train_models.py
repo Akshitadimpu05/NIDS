@@ -14,12 +14,15 @@ import numpy as np
 from pathlib import Path
 from torch.utils.data import DataLoader, TensorDataset
 
-# Add src to Python path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+# Add project root and src to Python path
+project_root = Path(__file__).parent.parent
+src_path = project_root / "src"
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(src_path))
 
-from models.ensemble import HybridNIDSModel
-from utils.data_preprocessing import DataPreprocessor
-from agents.environment import NIDSEnvironment
+from src.models.ensemble import HybridNIDSModel
+from src.utils.data_preprocessing import DataPreprocessor
+from src.agents.environment import NIDSEnvironment
 
 # Configure logging
 logging.basicConfig(
@@ -330,7 +333,7 @@ def main():
     parser = argparse.ArgumentParser(description='Train NIDS Hybrid Model')
     parser.add_argument('--config', type=str, default='config/model_config.yaml',
                        help='Path to configuration file')
-    parser.add_argument('--data', type=str, required=True,
+    parser.add_argument('--data', type=str, default='data/Darknet.CSV',
                        help='Path to training data directory')
     parser.add_argument('--output', type=str, default='data/models/hybrid_nids_model.pth',
                        help='Output path for trained model')

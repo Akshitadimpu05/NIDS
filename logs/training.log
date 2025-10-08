@@ -1,0 +1,143 @@
+2025-10-08 19:05:44,717 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:05:44,717 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:05:44,717 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:05:44,717 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:05:44,717 - scripts.train_models - INFO - Component: all
+2025-10-08 19:05:44,730 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:05:44,731 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:05:44,731 - scripts.train_models - ERROR - Training failed: src.models.autoencoder.TrafficAutoencoder() got multiple values for keyword argument 'input_dim'
+2025-10-08 19:09:09,483 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:09:09,483 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:09:09,483 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:09:09,483 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:09:09,483 - scripts.train_models - INFO - Component: all
+2025-10-08 19:09:09,497 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:09:09,497 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:09:09,497 - scripts.train_models - ERROR - Training failed: TrafficAutoencoder.__init__() got an unexpected keyword argument 'learning_rate'
+2025-10-08 19:14:41,960 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:14:41,960 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:14:41,960 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:14:41,961 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:14:41,961 - scripts.train_models - INFO - Component: all
+2025-10-08 19:14:41,974 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:14:41,974 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:14:41,982 - scripts.train_models - ERROR - Training failed: The NVIDIA driver on your system is too old (found version 11040). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver.
+2025-10-08 19:19:07,240 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:19:07,240 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:19:07,240 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:19:07,240 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:19:07,240 - scripts.train_models - INFO - Component: all
+2025-10-08 19:19:07,252 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:19:07,252 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:19:07,262 - scripts.train_models - ERROR - Training failed: The NVIDIA driver on your system is too old (found version 11040). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver.
+2025-10-08 19:21:41,358 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:21:41,358 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:21:41,358 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:21:41,358 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:21:41,359 - scripts.train_models - INFO - Component: all
+2025-10-08 19:21:41,370 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:21:41,371 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:21:43,101 - src.models.ensemble - INFO - Hybrid NIDS Model initialized successfully
+2025-10-08 19:21:43,102 - scripts.train_models - INFO - NIDS Trainer initialized
+2025-10-08 19:21:43,102 - scripts.train_models - INFO - Starting complete NIDS training pipeline...
+2025-10-08 19:21:43,102 - scripts.train_models - INFO - Loading data from data/Darknet.CSV
+2025-10-08 19:21:43,102 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-08 19:21:43,102 - scripts.train_models - ERROR - Training failed: No CSV files found in data/Darknet.CSV
+2025-10-08 19:23:39,294 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:23:39,294 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:23:39,294 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:23:39,294 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:23:39,294 - scripts.train_models - INFO - Component: all
+2025-10-08 19:23:39,306 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:23:39,306 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:23:40,998 - src.models.ensemble - INFO - Hybrid NIDS Model initialized successfully
+2025-10-08 19:23:40,998 - scripts.train_models - INFO - NIDS Trainer initialized
+2025-10-08 19:23:40,998 - scripts.train_models - INFO - Starting complete NIDS training pipeline...
+2025-10-08 19:23:40,998 - scripts.train_models - INFO - Loading data from data/Darknet.CSV
+2025-10-08 19:23:40,998 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-08 19:23:40,998 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-08 19:23:41,073 - src.utils.data_preprocessing - WARNING - Failed to load data/Darknet.CSV: Error tokenizing data. C error: Expected 85 fields in line 328, saw 125
+
+2025-10-08 19:23:41,073 - scripts.train_models - ERROR - Training failed: No valid CSV files could be loaded
+2025-10-08 19:26:03,761 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:26:03,762 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:26:03,762 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:26:03,762 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:26:03,762 - scripts.train_models - INFO - Component: all
+2025-10-08 19:26:03,774 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:26:03,774 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:26:05,435 - src.models.ensemble - INFO - Hybrid NIDS Model initialized successfully
+2025-10-08 19:26:05,435 - scripts.train_models - INFO - NIDS Trainer initialized
+2025-10-08 19:26:05,435 - scripts.train_models - INFO - Starting complete NIDS training pipeline...
+2025-10-08 19:26:05,435 - scripts.train_models - INFO - Loading data from data/Darknet.CSV
+2025-10-08 19:26:05,436 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-08 19:26:05,436 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-08 19:26:05,436 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-08 19:26:08,170 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-08 19:26:08,171 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-08 19:26:08,199 - src.utils.data_preprocessing - INFO - Features shape: (141530, 84), Labels shape: (141530,)
+2025-10-08 19:26:08,675 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 84)
+2025-10-08 19:26:08,677 - scripts.train_models - ERROR - Training failed: Cannot use mean strategy with non-numeric data:
+could not convert string to float: '10.152.152.11-216.58.220.99-57158-443-6'
+2025-10-08 19:43:15,170 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:43:15,171 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:43:15,171 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:43:15,171 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:43:15,171 - scripts.train_models - INFO - Component: all
+2025-10-08 19:43:15,183 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:43:15,183 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:43:16,833 - src.models.ensemble - INFO - Hybrid NIDS Model initialized successfully
+2025-10-08 19:43:16,833 - scripts.train_models - INFO - NIDS Trainer initialized
+2025-10-08 19:43:16,833 - scripts.train_models - INFO - Starting complete NIDS training pipeline...
+2025-10-08 19:43:16,833 - scripts.train_models - INFO - Loading data from data/Darknet.CSV
+2025-10-08 19:43:16,833 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-08 19:43:16,833 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-08 19:43:16,834 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-08 19:43:19,553 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-08 19:43:19,554 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-08 19:43:19,590 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-08 19:43:19,623 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-08 19:43:19,623 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-08 19:43:19,642 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-08 19:43:19,666 - scripts.train_models - ERROR - Training failed: Input X contains infinity or a value too large for dtype('float64').
+2025-10-08 19:45:46,569 - scripts.train_models - INFO - Starting NIDS model training...
+2025-10-08 19:45:46,569 - scripts.train_models - INFO - Configuration: config/model_config.yaml
+2025-10-08 19:45:46,569 - scripts.train_models - INFO - Data path: data/Darknet.CSV
+2025-10-08 19:45:46,569 - scripts.train_models - INFO - Output path: data/models/hybrid_nids_model.pth
+2025-10-08 19:45:46,569 - scripts.train_models - INFO - Component: all
+2025-10-08 19:45:46,581 - scripts.train_models - INFO - Loaded configuration from config/model_config.yaml
+2025-10-08 19:45:46,581 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-08 19:45:48,279 - src.models.ensemble - INFO - Hybrid NIDS Model initialized successfully
+2025-10-08 19:45:48,279 - scripts.train_models - INFO - NIDS Trainer initialized
+2025-10-08 19:45:48,279 - scripts.train_models - INFO - Starting complete NIDS training pipeline...
+2025-10-08 19:45:48,279 - scripts.train_models - INFO - Loading data from data/Darknet.CSV
+2025-10-08 19:45:48,280 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-08 19:45:48,280 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-08 19:45:48,280 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-08 19:45:51,016 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-08 19:45:51,017 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-08 19:45:51,053 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-08 19:45:51,085 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-08 19:45:51,086 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-08 19:45:51,105 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-08 19:45:51,105 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-08 19:45:51,147 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-08 19:45:51,147 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-08 19:45:51,327 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-08 19:45:51,689 - src.utils.data_preprocessing - INFO - Selected 54 features out of 79
+2025-10-08 19:45:51,836 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-08 19:45:51,845 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-08 19:45:51,880 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-08 19:45:51,880 - src.utils.data_preprocessing - INFO - Creating train/validation/test splits
+2025-10-08 19:45:53,277 - src.utils.data_preprocessing - INFO - Removed duplicates, remaining samples: 117008
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - X_train shape: (81905, 54)
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - X_val shape: (11701, 54)
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - X_test shape: (23402, 54)
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - y_train shape: (81905,)
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - y_val shape: (11701,)
+2025-10-08 19:45:53,460 - src.utils.data_preprocessing - INFO - y_test shape: (23402,)
+2025-10-08 19:45:53,464 - scripts.train_models - INFO - Data loaded - Train: 81905, Val: 11701, Test: 23402
+2025-10-08 19:45:53,465 - src.utils.data_preprocessing - INFO - Preprocessor saved to data/models/preprocessor.pkl
+2025-10-08 19:45:53,473 - scripts.train_models - INFO - Starting autoencoder training...
+2025-10-08 19:45:56,855 - src.models.ensemble - INFO - Training Autoencoder...
+2025-10-08 19:45:57,008 - scripts.train_models - ERROR - Training failed: mat1 and mat2 shapes cannot be multiplied (256x54 and 77x64)
