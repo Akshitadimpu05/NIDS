@@ -7,16 +7,16 @@ autoencoder:
   - 32
   - 16
   - 8
-  input_dim: 78
+  input_dim: 54
   latent_dim: 4
   learning_rate: 0.001
   reconstruction_threshold: 0.1
 capsnet:
   batch_size: 128
   digit_caps_dim: 16
-  digit_caps_num: 10
+  digit_caps_num: 4
   epochs: 50
-  input_dim: 78
+  input_dim: 54
   learning_rate: 0.001
   primary_caps_dim: 8
   primary_caps_num: 32

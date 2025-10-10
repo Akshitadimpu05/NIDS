@@ -431,8 +431,8 @@ class TrafficCapture:
             else:
                 features.extend([0, 0, 0, 0, 0, 0])
             
-            # Pad or truncate to expected feature count (78 features)
-            target_features = 78
+            # Pad or truncate to expected feature count (54 features)
+            target_features = 54
             if len(features) < target_features:
                 features.extend([0] * (target_features - len(features)))
             elif len(features) > target_features:
@@ -442,7 +442,7 @@ class TrafficCapture:
             
         except Exception as e:
             logger.error(f"Error extracting flow features: {e}")
-            return [0] * 78  # Return zero features on error
+            return [0] * 54  # Return zero features on error
     
     def _cleanup_flows(self):
         """Clean up expired flows."""

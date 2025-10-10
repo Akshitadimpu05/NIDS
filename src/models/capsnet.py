@@ -148,7 +148,7 @@ class CapsuleNetwork(nn.Module):
     """
     
     def __init__(self,
-                 input_dim: int = 78,
+                 input_dim: int = 54,
                  primary_caps_dim: int = 8,
                  primary_caps_num: int = 32,
                  digit_caps_dim: int = 16,
@@ -236,8 +236,10 @@ class CapsuleNetwork(nn.Module):
         
         # Reconstruction
         if target is not None:
-            # Mask digit capsules with target
-            masked_caps = digit_caps * target.unsqueeze(-1)
+            # Convert target to one-hot mask for masking digit capsules
+            mask = torch.zeros_like(class_predictions)
+            mask.scatter_(1, target.unsqueeze(1), 1.0)
+            masked_caps = digit_caps * mask.unsqueeze(-1)
             reconstruction_input = masked_caps.view(x.size(0), -1)
         else:
             # Use predicted class for masking
@@ -389,7 +391,12 @@ class CapsNetTrainer:
             self.optimizer.zero_grad()
             class_predictions, _, reconstruction = self.model(x, y)
             
-            loss, loss_components = self.criterion(class_predictions, y, reconstruction, x)
+            # Convert labels to one-hot encoding for loss calculation
+            num_classes = class_predictions.size(1)
+            y_one_hot = torch.zeros(y.size(0), num_classes, device=self.device)
+            y_one_hot.scatter_(1, y.unsqueeze(1), 1.0)
+            
+            loss, loss_components = self.criterion(class_predictions, y_one_hot, reconstruction, x)
             
             loss.backward()
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
@@ -415,7 +422,13 @@ class CapsNetTrainer:
                 x, y = batch_data[0].to(self.device), batch_data[1].to(self.device)
                 
                 class_predictions, _, reconstruction = self.model(x, y)
-                loss, loss_components = self.criterion(class_predictions, y, reconstruction, x)
+                
+                # Convert labels to one-hot encoding for loss calculation
+                num_classes = class_predictions.size(1)
+                y_one_hot = torch.zeros(y.size(0), num_classes, device=self.device)
+                y_one_hot.scatter_(1, y.unsqueeze(1), 1.0)
+                
+                loss, loss_components = self.criterion(class_predictions, y_one_hot, reconstruction, x)
                 
                 for key in total_losses:
                     total_losses[key] += loss_components[key]

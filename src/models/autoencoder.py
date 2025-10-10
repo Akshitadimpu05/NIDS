@@ -20,7 +20,7 @@ class TrafficAutoencoder(nn.Module):
     """
     
     def __init__(self, 
-                 input_dim: int = 78,
+                 input_dim: int = 54,
                  hidden_dims: list = [64, 32, 16, 8],
                  latent_dim: int = 4,
                  dropout_rate: float = 0.2):

@@ -16,7 +16,7 @@ source venv/bin/activate
 Download the CIC-Darknet2020 dataset from:
 https://www.kaggle.com/datasets/peterfriedrich1/cicdarknet2020-internet-traffic
 
-Extract CSV files to: `data/raw/cic-darknet2020/`
+Extract CSV files to: `data/`
 
 ### 3. Train Models
 ```bash
@@ -253,6 +253,4 @@ For issues and questions:
 4. Verify network connectivity between components
 5. Check system resources (CPU, memory, disk)
 
-## License
 
-MIT License - See LICENSE file for details.

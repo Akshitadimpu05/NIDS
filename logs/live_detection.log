@@ -1,0 +1,998 @@
+2025-10-10 16:40:26,179 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:40:26,180 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:40:26,180 - live_detection_system - INFO - Loading joint NIDS model...
+2025-10-10 16:40:26,227 - live_detection_system - INFO - Joint model loaded successfully
+2025-10-10 16:40:26,227 - live_detection_system - INFO - Loading RL agent...
+2025-10-10 16:40:28,188 - src.agents.ppo_agent - INFO - PPO agent loaded from data/models/joint_rl_agent.pth
+2025-10-10 16:40:28,189 - live_detection_system - INFO - RL agent loaded successfully
+2025-10-10 16:40:28,189 - live_detection_system - INFO - Live NIDS Detector initialized successfully
+2025-10-10 16:40:28,189 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:40:28,189 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:40:28,189 - live_detection_system - INFO - Loading network flows from data/Darknet.CSV
+2025-10-10 16:40:28,189 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-10 16:40:28,189 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-10 16:40:28,190 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-10 16:40:30,904 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-10 16:40:30,905 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-10 16:40:30,942 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-10 16:40:30,975 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-10 16:40:30,975 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-10 16:40:30,993 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-10 16:40:30,994 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-10 16:40:31,034 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-10 16:40:31,035 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-10 16:40:31,204 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-10 16:40:31,566 - src.utils.data_preprocessing - INFO - Selected exactly 54 features out of 79
+2025-10-10 16:40:31,709 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-10 16:40:31,719 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-10 16:40:31,756 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-10 16:40:40,197 - live_detection_system - INFO - Loaded 141530 network flows
+2025-10-10 16:40:40,211 - live_detection_system - INFO - 🚀 Starting Live NIDS Detection System
+2025-10-10 16:40:40,211 - live_detection_system - INFO - 📊 Detection rate: 5 flows/second
+2025-10-10 16:40:40,267 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000000 (192.168.153.186:49302 -> 10.0.208.213:22) - Class: Non-Tor, Confidence: 0.418
+2025-10-10 16:40:40,762 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000002 (192.168.87.112:23670 -> 10.0.125.18:21) - Class: Non-Tor, Confidence: 0.416
+2025-10-10 16:40:42,034 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000007 (192.168.147.144:39648 -> 10.0.26.43:25) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:40:42,518 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000009 (192.168.25.200:4516 -> 10.0.32.21:25) - Class: Non-Tor, Confidence: 0.439, Anomaly: 1.053
+2025-10-10 16:40:43,004 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000011 (192.168.11.16:39071 -> 10.0.34.214:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:40:43,246 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000012 (192.168.102.12:12694 -> 10.0.139.99:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:40:45,275 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000020 (192.168.226.245:13057 -> 10.0.89.79:993) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.697
+2025-10-10 16:40:45,526 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000021 (192.168.82.23:60162 -> 10.0.19.140:53) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:40:46,293 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000024 (192.168.251.247:41706 -> 10.0.148.90:80) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:40:46,783 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000026 (192.168.236.123:63663 -> 10.0.28.181:25) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:40:47,270 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000028 (192.168.126.16:16703 -> 10.0.165.82:80) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:40:47,776 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000030 (192.168.98.8:23034 -> 10.0.137.118:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:40:48,277 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000032 (192.168.93.213:45629 -> 10.0.116.212:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:48,515 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000033 (192.168.47.1:33843 -> 10.0.37.232:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.478
+2025-10-10 16:40:48,775 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000034 (192.168.226.64:47788 -> 10.0.211.209:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:40:49,035 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000035 (192.168.236.1:4487 -> 10.0.133.9:443) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.695
+2025-10-10 16:40:49,561 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000037 (192.168.155.251:7514 -> 10.0.10.136:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:40:49,822 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000038 (192.168.93.127:40273 -> 10.0.179.73:25) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:50,070 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000039 (192.168.30.113:1898 -> 10.0.24.155:995) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:40:50,311 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000040 (192.168.229.68:49779 -> 10.0.224.177:80) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:40:50,820 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000042 (192.168.177.13:32375 -> 10.0.218.84:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:40:51,326 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000044 (192.168.88.39:9591 -> 10.0.77.88:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:40:51,569 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000045 (192.168.123.5:21642 -> 10.0.59.161:993) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:52,064 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000047 (192.168.96.173:15699 -> 10.0.127.154:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:53,287 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000052 (192.168.188.214:4205 -> 10.0.66.105:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:53,534 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000053 (192.168.57.103:12724 -> 10.0.93.89:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:40:54,011 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000055 (192.168.234.76:35437 -> 10.0.208.107:80) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:40:54,261 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000056 (192.168.175.128:24331 -> 10.0.13.45:80) - Class: Non-Tor, Confidence: 0.423, Anomaly: 0.706
+2025-10-10 16:40:54,752 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000058 (192.168.99.227:18276 -> 10.0.92.80:993) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:40:55,489 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000061 (192.168.84.232:8692 -> 10.0.32.210:443) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.781
+2025-10-10 16:40:55,731 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000062 (192.168.194.87:63494 -> 10.0.59.62:53) - Class: Non-Tor, Confidence: 0.441, Anomaly: 1.033
+2025-10-10 16:40:56,237 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000064 (192.168.6.246:15615 -> 10.0.144.179:443) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:40:57,726 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000070 (192.168.252.147:25832 -> 10.0.54.217:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.278
+2025-10-10 16:40:58,456 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000073 (192.168.123.112:4518 -> 10.0.6.122:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:40:58,704 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000074 (192.168.25.94:6309 -> 10.0.136.206:53) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:40:59,202 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000076 (192.168.252.237:10393 -> 10.0.226.59:443) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:41:00,164 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000080 (192.168.183.229:60952 -> 10.0.87.107:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:41:00,423 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000081 (192.168.51.131:1940 -> 10.0.92.44:53) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:41:00,669 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000082 (192.168.170.7:50138 -> 10.0.226.84:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:41:01,411 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000085 (192.168.69.218:46833 -> 10.0.92.135:993) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:41:01,662 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000086 (192.168.224.43:37306 -> 10.0.84.232:53) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.643
+2025-10-10 16:41:01,910 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000087 (192.168.60.84:21167 -> 10.0.69.193:443) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:41:02,163 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000088 (192.168.227.91:26396 -> 10.0.92.180:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:41:02,411 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000089 (192.168.154.195:38304 -> 10.0.180.90:443) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:41:02,923 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000091 (192.168.97.160:52000 -> 10.0.150.248:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:41:03,162 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000092 (192.168.132.226:40520 -> 10.0.35.222:995) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.327
+2025-10-10 16:41:03,412 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000093 (192.168.19.22:22699 -> 10.0.38.131:22) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.425
+2025-10-10 16:41:03,658 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000094 (192.168.99.147:4228 -> 10.0.248.210:443) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:41:04,160 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000096 (192.168.122.81:7981 -> 10.0.152.4:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:41:04,395 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000097 (192.168.22.15:27395 -> 10.0.48.121:993) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.782
+2025-10-10 16:41:04,638 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000098 (192.168.76.198:21821 -> 10.0.149.28:53) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:41:04,897 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000099 (192.168.128.23:19294 -> 10.0.35.226:25) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:41:05,135 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000100 (192.168.14.121:34412 -> 10.0.181.7:21) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:41:05,383 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000101 (192.168.245.67:32721 -> 10.0.51.36:995) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.363
+2025-10-10 16:41:05,640 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000102 (192.168.235.139:35939 -> 10.0.214.169:25) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.307
+2025-10-10 16:41:05,893 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000103 (192.168.157.211:10546 -> 10.0.189.201:995) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.613
+2025-10-10 16:41:06,380 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000105 (192.168.202.63:47672 -> 10.0.154.32:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:41:06,621 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000106 (192.168.190.197:5232 -> 10.0.252.156:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:41:07,105 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000108 (192.168.71.60:18312 -> 10.0.144.184:993) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:41:07,359 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000109 (192.168.47.18:30358 -> 10.0.230.79:443) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:41:07,604 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000110 (192.168.212.162:22733 -> 10.0.221.150:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:41:07,839 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000111 (192.168.25.23:32873 -> 10.0.69.115:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:41:08,586 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000114 (192.168.120.202:15467 -> 10.0.119.225:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:41:09,307 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000117 (192.168.49.73:47281 -> 10.0.29.247:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:41:09,815 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000119 (192.168.125.152:44540 -> 10.0.219.101:443) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:41:10,061 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000120 (192.168.222.70:20375 -> 10.0.128.25:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:41:10,262 - live_detection_system - INFO - 🛑 Live detection system stopped
+2025-10-10 16:42:17,305 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7000
+ * Running on http://10.0.24.7:7000
+2025-10-10 16:42:17,306 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-10-10 16:42:49,036 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:49] "GET / HTTP/1.1" 200 -
+2025-10-10 16:42:49,584 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:49] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:49,586 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:49] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:42:49,605 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:49] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-10-10 16:42:51,659 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:51] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:51,660 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:51] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:42:53,608 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:53] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:53,649 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:53] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:42:55,602 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:55] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:55,605 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:55] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:42:57,609 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:57] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:57,649 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:57] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:42:59,633 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:59] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:42:59,637 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:42:59] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:01,617 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:01] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:01,651 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:01] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:03,608 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:03] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:03,609 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:03] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:05,590 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:05] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:05,595 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:05] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:07,807 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:07] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:07,903 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:07] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:09,771 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:09] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:09,772 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:09] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:11,831 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:11] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:11,832 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:11] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:13,794 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:13] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:43:13,827 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:43:13] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:43:41,847 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:43:41,848 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:43:41,848 - live_detection_system - INFO - Loading joint NIDS model...
+2025-10-10 16:43:41,896 - live_detection_system - INFO - Joint model loaded successfully
+2025-10-10 16:43:41,896 - live_detection_system - INFO - Loading RL agent...
+2025-10-10 16:43:43,825 - src.agents.ppo_agent - INFO - PPO agent loaded from data/models/joint_rl_agent.pth
+2025-10-10 16:43:43,825 - live_detection_system - INFO - RL agent loaded successfully
+2025-10-10 16:43:43,826 - live_detection_system - INFO - Live NIDS Detector initialized successfully
+2025-10-10 16:43:43,826 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:43:43,826 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:43:43,826 - live_detection_system - INFO - Loading network flows from data/Darknet.CSV
+2025-10-10 16:43:43,826 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-10 16:43:43,826 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-10 16:43:43,827 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-10 16:43:46,567 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-10 16:43:46,568 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-10 16:43:46,604 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-10 16:43:46,637 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-10 16:43:46,637 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-10 16:43:46,655 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-10 16:43:46,656 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-10 16:43:46,699 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-10 16:43:46,699 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-10 16:43:46,868 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-10 16:43:47,227 - src.utils.data_preprocessing - INFO - Selected exactly 54 features out of 79
+2025-10-10 16:43:47,369 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-10 16:43:47,378 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-10 16:43:47,415 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-10 16:43:56,393 - live_detection_system - INFO - Loaded 141530 network flows
+2025-10-10 16:43:56,408 - live_detection_system - INFO - 🚀 Starting Live NIDS Detection System
+2025-10-10 16:43:56,408 - live_detection_system - INFO - 📊 Detection rate: 5 flows/second
+2025-10-10 16:43:56,725 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000001 (192.168.88.105:57304 -> 10.0.140.36:25) - Class: Non-Tor, Confidence: 0.416, Anomaly: 0.165
+2025-10-10 16:43:56,975 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000002 (192.168.184.250:47148 -> 10.0.93.139:80) - Class: Non-Tor, Confidence: 0.416
+2025-10-10 16:43:57,730 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000005 (192.168.253.82:25837 -> 10.0.102.238:995) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:43:58,720 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000009 (192.168.240.147:5305 -> 10.0.26.155:993) - Class: Non-Tor, Confidence: 0.439, Anomaly: 1.053
+2025-10-10 16:43:59,215 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000011 (192.168.243.251:25599 -> 10.0.210.160:25) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:44:00,221 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000015 (192.168.38.247:52350 -> 10.0.8.91:993) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:00,714 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000017 (192.168.28.197:12073 -> 10.0.164.248:993) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.687
+2025-10-10 16:44:02,213 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000023 (192.168.85.128:57870 -> 10.0.66.77:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:02,722 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000025 (192.168.102.29:23408 -> 10.0.208.217:443) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:44:02,966 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000026 (192.168.46.122:25189 -> 10.0.217.111:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:44:03,214 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000027 (192.168.95.168:42049 -> 10.0.230.132:993) - Class: Non-Tor, Confidence: 0.441, Anomaly: 0.996
+2025-10-10 16:44:03,467 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000028 (192.168.137.51:42334 -> 10.0.86.224:995) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:44:03,950 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000030 (192.168.34.172:7128 -> 10.0.105.129:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:44:05,430 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000036 (192.168.69.145:9814 -> 10.0.101.25:80) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:44:07,404 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000044 (192.168.180.154:7245 -> 10.0.22.107:993) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:44:08,143 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000047 (192.168.48.39:59495 -> 10.0.216.55:80) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:44:08,625 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000049 (192.168.92.216:28315 -> 10.0.160.55:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:09,205 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000051 (192.168.128.205:13545 -> 10.0.64.113:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:09,938 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000054 (192.168.168.45:12934 -> 10.0.146.56:53) - Class: Non-Tor, Confidence: 0.441, Anomaly: 1.059
+2025-10-10 16:44:10,429 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000056 (192.168.134.157:51205 -> 10.0.237.106:22) - Class: Non-Tor, Confidence: 0.423, Anomaly: 0.706
+2025-10-10 16:44:10,677 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000057 (192.168.48.42:43116 -> 10.0.201.224:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:11,183 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000059 (192.168.1.40:19388 -> 10.0.5.34:993) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.476
+2025-10-10 16:44:11,926 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000062 (192.168.80.74:54747 -> 10.0.27.79:993) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:44:12,411 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000064 (192.168.193.94:56937 -> 10.0.177.101:993) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.439
+2025-10-10 16:44:12,924 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000066 (192.168.207.167:32143 -> 10.0.88.152:53) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.297
+2025-10-10 16:44:13,165 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000067 (192.168.224.150:29914 -> 10.0.205.49:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:13,409 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000068 (192.168.71.98:32398 -> 10.0.223.129:993) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:44:13,646 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000069 (192.168.141.14:44583 -> 10.0.181.101:80) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:44:13,895 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000070 (192.168.45.79:35667 -> 10.0.56.22:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.278
+2025-10-10 16:44:14,146 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000071 (192.168.216.81:18698 -> 10.0.115.237:21) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:44:14,390 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000072 (192.168.210.217:29859 -> 10.0.37.130:995) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.439
+2025-10-10 16:44:15,384 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000076 (192.168.208.34:49911 -> 10.0.174.3:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:44:15,632 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000077 (192.168.176.13:40373 -> 10.0.71.236:53) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:44:16,379 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000080 (192.168.220.143:23354 -> 10.0.66.132:22) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.447
+2025-10-10 16:44:17,105 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000083 (192.168.251.13:39417 -> 10.0.114.96:995) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:44:17,346 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000084 (192.168.128.186:7454 -> 10.0.58.114:22) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:44:17,838 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000086 (192.168.49.17:6160 -> 10.0.13.84:443) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:44:18,335 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000088 (192.168.196.24:46142 -> 10.0.149.83:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:18,823 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000090 (192.168.11.48:24255 -> 10.0.185.143:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:44:19,312 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000092 (192.168.189.80:30486 -> 10.0.180.145:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:19,561 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000093 (192.168.46.100:32100 -> 10.0.79.33:21) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:44:20,327 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000096 (192.168.108.144:28705 -> 10.0.232.212:80) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.623
+2025-10-10 16:44:21,080 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000099 (192.168.158.235:5411 -> 10.0.59.157:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:21,332 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000100 (192.168.37.128:27553 -> 10.0.149.10:21) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.685
+2025-10-10 16:44:21,573 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000101 (192.168.225.37:53448 -> 10.0.33.161:21) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.363
+2025-10-10 16:44:21,827 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000102 (192.168.7.37:63325 -> 10.0.2.225:80) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:22,083 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000103 (192.168.155.21:6915 -> 10.0.232.213:443) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.613
+2025-10-10 16:44:22,820 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000106 (192.168.157.137:38147 -> 10.0.235.93:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:23,070 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000107 (192.168.249.232:6094 -> 10.0.71.88:53) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:44:23,319 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000108 (192.168.231.188:13307 -> 10.0.86.228:995) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.787
+2025-10-10 16:44:23,830 - live_detection_system - WARNING - 🚫 BLOCKING flow flow_000110 (192.168.148.148:58309 -> 10.0.148.147:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:44:24,072 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000111 (192.168.131.132:41870 -> 10.0.162.112:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:24,560 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000113 (192.168.226.194:10555 -> 10.0.209.123:993) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:44:24,814 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000114 (192.168.57.105:14709 -> 10.0.221.89:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:44:25,065 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000115 (192.168.94.75:43248 -> 10.0.240.19:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:44:25,564 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000117 (192.168.248.197:33880 -> 10.0.137.234:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:44:25,811 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000118 (192.168.225.43:64474 -> 10.0.157.212:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:44:26,069 - live_detection_system - INFO - ⚠️  THROTTLING flow flow_000119 (192.168.35.24:16098 -> 10.0.184.59:21) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:44:26,525 - live_detection_system - INFO - 🛑 Live detection system stopped
+2025-10-10 16:44:46,611 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:44:46,612 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:44:46,612 - __main__ - INFO - Loading joint NIDS model...
+2025-10-10 16:44:46,653 - __main__ - INFO - Joint model loaded successfully
+2025-10-10 16:44:46,654 - __main__ - INFO - Loading RL agent...
+2025-10-10 16:44:48,406 - src.agents.ppo_agent - INFO - PPO agent loaded from data/models/joint_rl_agent.pth
+2025-10-10 16:44:48,407 - __main__ - INFO - RL agent loaded successfully
+2025-10-10 16:44:48,407 - __main__ - INFO - Live NIDS Detector initialized successfully
+2025-10-10 16:44:48,407 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:44:48,407 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:44:48,407 - __main__ - INFO - Loading network flows from data/Darknet.CSV
+2025-10-10 16:44:48,408 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-10 16:44:48,408 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-10 16:44:48,408 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-10 16:44:51,120 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-10 16:44:51,121 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-10 16:44:51,158 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-10 16:44:51,193 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-10 16:44:51,194 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-10 16:44:51,212 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-10 16:44:51,213 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-10 16:44:51,254 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-10 16:44:51,254 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-10 16:44:51,439 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-10 16:44:51,805 - src.utils.data_preprocessing - INFO - Selected exactly 54 features out of 79
+2025-10-10 16:44:51,947 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-10 16:44:51,956 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-10 16:44:51,992 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-10 16:45:00,922 - __main__ - INFO - Loaded 141530 network flows
+2025-10-10 16:45:00,937 - __main__ - INFO - 🚀 Starting Live NIDS Detection System
+2025-10-10 16:45:00,938 - __main__ - INFO - 📊 Detection rate: 10 flows/second
+2025-10-10 16:45:01,426 - __main__ - INFO - ⚠️  THROTTLING flow flow_000003 (192.168.158.110:36657 -> 10.0.33.90:22) - Class: Non-Tor, Confidence: 0.422
+2025-10-10 16:45:01,556 - __main__ - INFO - ⚠️  THROTTLING flow flow_000004 (192.168.58.183:10750 -> 10.0.62.200:995) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:45:02,313 - __main__ - INFO - ⚠️  THROTTLING flow flow_000009 (192.168.33.28:21636 -> 10.0.60.178:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:02,472 - __main__ - WARNING - 🚫 BLOCKING flow flow_000010 (192.168.251.96:25442 -> 10.0.155.254:993) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.457
+2025-10-10 16:45:03,051 - __main__ - INFO - ⚠️  THROTTLING flow flow_000014 (192.168.76.193:12988 -> 10.0.100.75:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:03,184 - __main__ - INFO - ⚠️  THROTTLING flow flow_000015 (192.168.220.233:50312 -> 10.0.168.158:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:03,497 - __main__ - INFO - ⚠️  THROTTLING flow flow_000017 (192.168.28.190:9864 -> 10.0.29.57:993) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:45:03,653 - __main__ - INFO - ⚠️  THROTTLING flow flow_000018 (192.168.159.76:7252 -> 10.0.226.250:25) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:04,253 - __main__ - INFO - ⚠️  THROTTLING flow flow_000022 (192.168.146.25:39578 -> 10.0.213.229:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:04,404 - __main__ - INFO - ⚠️  THROTTLING flow flow_000023 (192.168.183.190:1681 -> 10.0.138.198:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:04,547 - __main__ - WARNING - 🚫 BLOCKING flow flow_000024 (192.168.158.192:63018 -> 10.0.209.185:21) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.631
+2025-10-10 16:45:04,698 - __main__ - INFO - ⚠️  THROTTLING flow flow_000025 (192.168.225.69:38011 -> 10.0.117.90:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:04,838 - __main__ - WARNING - 🚫 BLOCKING flow flow_000026 (192.168.143.234:65207 -> 10.0.195.122:53) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.722
+2025-10-10 16:45:04,994 - __main__ - INFO - ⚠️  THROTTLING flow flow_000027 (192.168.201.229:13240 -> 10.0.135.231:21) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:05,148 - __main__ - INFO - ⚠️  THROTTLING flow flow_000028 (192.168.176.49:28313 -> 10.0.195.231:80) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:45:05,296 - __main__ - WARNING - 🚫 BLOCKING flow flow_000029 (192.168.162.56:17500 -> 10.0.96.164:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.369
+2025-10-10 16:45:05,454 - __main__ - INFO - ⚠️  THROTTLING flow flow_000030 (192.168.57.142:13642 -> 10.0.77.211:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:05,605 - __main__ - WARNING - 🚫 BLOCKING flow flow_000031 (192.168.173.75:46278 -> 10.0.238.211:443) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.622
+2025-10-10 16:45:05,759 - __main__ - WARNING - 🚫 BLOCKING flow flow_000032 (192.168.66.147:53240 -> 10.0.63.184:443) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.348
+2025-10-10 16:45:06,501 - __main__ - INFO - ⚠️  THROTTLING flow flow_000037 (192.168.157.30:26802 -> 10.0.125.2:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:06,652 - __main__ - INFO - ⚠️  THROTTLING flow flow_000038 (192.168.111.141:18269 -> 10.0.22.223:22) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:45:06,796 - __main__ - INFO - ⚠️  THROTTLING flow flow_000039 (192.168.233.159:52539 -> 10.0.70.141:21) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:07,085 - __main__ - INFO - ⚠️  THROTTLING flow flow_000041 (192.168.119.119:27899 -> 10.0.208.25:995) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:45:07,240 - __main__ - INFO - ⚠️  THROTTLING flow flow_000042 (192.168.49.12:19130 -> 10.0.241.123:22) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:45:07,376 - __main__ - INFO - ⚠️  THROTTLING flow flow_000043 (192.168.225.92:26113 -> 10.0.110.69:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:07,526 - __main__ - INFO - ⚠️  THROTTLING flow flow_000044 (192.168.229.184:34371 -> 10.0.148.7:25) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:07,819 - __main__ - INFO - ⚠️  THROTTLING flow flow_000046 (192.168.165.244:13404 -> 10.0.188.123:22) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:08,126 - __main__ - INFO - ⚠️  THROTTLING flow flow_000048 (192.168.218.26:61577 -> 10.0.80.157:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:08,436 - __main__ - INFO - ⚠️  THROTTLING flow flow_000050 (192.168.98.64:61907 -> 10.0.248.221:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:09,026 - __main__ - INFO - ⚠️  THROTTLING flow flow_000054 (192.168.97.10:21326 -> 10.0.249.97:443) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:09,169 - __main__ - WARNING - 🚫 BLOCKING flow flow_000055 (192.168.106.12:52889 -> 10.0.198.51:22) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.365
+2025-10-10 16:45:09,470 - __main__ - INFO - ⚠️  THROTTLING flow flow_000057 (192.168.79.249:53105 -> 10.0.155.118:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:09,605 - __main__ - INFO - ⚠️  THROTTLING flow flow_000058 (192.168.234.125:12921 -> 10.0.253.125:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:45:10,646 - __main__ - INFO - ⚠️  THROTTLING flow flow_000065 (192.168.161.29:6505 -> 10.0.215.170:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:10,791 - __main__ - WARNING - 🚫 BLOCKING flow flow_000066 (192.168.47.137:55677 -> 10.0.155.88:25) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.297
+2025-10-10 16:45:10,940 - __main__ - INFO - ⚠️  THROTTLING flow flow_000067 (192.168.119.77:5578 -> 10.0.237.21:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:11,099 - __main__ - INFO - ⚠️  THROTTLING flow flow_000068 (192.168.200.213:21239 -> 10.0.230.114:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:11,550 - __main__ - INFO - ⚠️  THROTTLING flow flow_000071 (192.168.218.97:6545 -> 10.0.20.80:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:11,690 - __main__ - INFO - ⚠️  THROTTLING flow flow_000072 (192.168.188.57:63393 -> 10.0.66.149:993) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:12,116 - __main__ - INFO - ⚠️  THROTTLING flow flow_000075 (192.168.17.94:52959 -> 10.0.194.121:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:12,542 - __main__ - WARNING - 🚫 BLOCKING flow flow_000078 (192.168.246.203:45230 -> 10.0.86.105:443) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.786
+2025-10-10 16:45:13,264 - __main__ - INFO - ⚠️  THROTTLING flow flow_000083 (192.168.60.160:21531 -> 10.0.6.96:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:13,410 - __main__ - INFO - ⚠️  THROTTLING flow flow_000084 (192.168.65.213:22521 -> 10.0.34.227:21) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:45:13,562 - __main__ - WARNING - 🚫 BLOCKING flow flow_000085 (192.168.14.178:52626 -> 10.0.226.40:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.176
+2025-10-10 16:45:13,702 - __main__ - WARNING - 🚫 BLOCKING flow flow_000086 (192.168.120.147:26593 -> 10.0.133.37:53) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.643
+2025-10-10 16:45:13,846 - __main__ - INFO - ⚠️  THROTTLING flow flow_000087 (192.168.93.174:59263 -> 10.0.207.25:25) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:45:14,001 - __main__ - WARNING - 🚫 BLOCKING flow flow_000088 (192.168.175.38:11783 -> 10.0.3.60:995) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:14,157 - __main__ - WARNING - 🚫 BLOCKING flow flow_000089 (192.168.106.30:5926 -> 10.0.49.152:993) - Class: Non-Tor, Confidence: 0.441, Anomaly: 1.148
+2025-10-10 16:45:14,466 - __main__ - INFO - ⚠️  THROTTLING flow flow_000091 (192.168.242.238:62680 -> 10.0.164.146:21) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:15,632 - __main__ - INFO - ⚠️  THROTTLING flow flow_000099 (192.168.83.120:26735 -> 10.0.106.253:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:15,916 - __main__ - INFO - ⚠️  THROTTLING flow flow_000101 (192.168.193.89:33538 -> 10.0.232.241:995) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:45:16,059 - __main__ - INFO - ⚠️  THROTTLING flow flow_000102 (192.168.251.200:23105 -> 10.0.234.101:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:16,503 - __main__ - INFO - ⚠️  THROTTLING flow flow_000105 (192.168.254.113:55958 -> 10.0.74.78:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:16,811 - __main__ - WARNING - 🚫 BLOCKING flow flow_000107 (192.168.18.128:5345 -> 10.0.45.95:25) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.458
+2025-10-10 16:45:17,232 - __main__ - WARNING - 🚫 BLOCKING flow flow_000110 (192.168.11.239:53026 -> 10.0.105.120:443) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:17,515 - __main__ - WARNING - 🚫 BLOCKING flow flow_000112 (192.168.67.243:21826 -> 10.0.205.54:443) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.469
+2025-10-10 16:45:17,979 - __main__ - INFO - ⚠️  THROTTLING flow flow_000115 (192.168.81.166:18176 -> 10.0.153.51:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:18,100 - __main__ - WARNING - 🚫 BLOCKING flow flow_000116 (192.168.163.93:64249 -> 10.0.27.153:22) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.086
+2025-10-10 16:45:19,612 - __main__ - WARNING - 🚫 BLOCKING flow flow_000126 (192.168.216.205:15859 -> 10.0.6.104:995) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:19,888 - __main__ - INFO - ⚠️  THROTTLING flow flow_000128 (192.168.60.159:1517 -> 10.0.235.190:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:20,034 - __main__ - WARNING - 🚫 BLOCKING flow flow_000129 (192.168.14.28:56945 -> 10.0.236.176:443) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.008
+2025-10-10 16:45:20,611 - __main__ - INFO - ⚠️  THROTTLING flow flow_000133 (192.168.133.14:13840 -> 10.0.197.98:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:20,766 - __main__ - INFO - ⚠️  THROTTLING flow flow_000134 (192.168.172.61:62300 -> 10.0.85.207:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:20,925 - __main__ - INFO - ⚠️  THROTTLING flow flow_000135 (192.168.193.176:65096 -> 10.0.152.50:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:21,064 - __main__ - INFO - ⚠️  THROTTLING flow flow_000136 (192.168.221.8:64280 -> 10.0.108.78:25) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:45:21,219 - __main__ - WARNING - 🚫 BLOCKING flow flow_000137 (192.168.50.110:1789 -> 10.0.170.237:21) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.747
+2025-10-10 16:45:21,514 - __main__ - WARNING - 🚫 BLOCKING flow flow_000139 (192.168.15.218:33087 -> 10.0.125.27:995) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.539
+2025-10-10 16:45:21,783 - __main__ - INFO - ⚠️  THROTTLING flow flow_000141 (192.168.97.44:1135 -> 10.0.142.152:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:22,225 - __main__ - WARNING - 🚫 BLOCKING flow flow_000144 (192.168.150.170:41392 -> 10.0.41.178:25) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.963
+2025-10-10 16:45:22,367 - __main__ - WARNING - 🚫 BLOCKING flow flow_000145 (192.168.43.87:47006 -> 10.0.113.74:53) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.341
+2025-10-10 16:45:22,966 - __main__ - WARNING - 🚫 BLOCKING flow flow_000149 (192.168.22.89:42689 -> 10.0.176.77:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.540
+2025-10-10 16:45:23,123 - __main__ - INFO - ⚠️  THROTTLING flow flow_000150 (192.168.187.173:46661 -> 10.0.192.199:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:23,264 - __main__ - INFO - ⚠️  THROTTLING flow flow_000151 (192.168.239.134:42209 -> 10.0.118.75:993) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:23,414 - __main__ - WARNING - 🚫 BLOCKING flow flow_000152 (192.168.85.245:18656 -> 10.0.133.46:21) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:24,044 - __main__ - INFO - ⚠️  THROTTLING flow flow_000156 (192.168.239.235:12363 -> 10.0.48.114:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:24,194 - __main__ - INFO - ⚠️  THROTTLING flow flow_000157 (192.168.162.13:32623 -> 10.0.18.23:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:24,334 - __main__ - INFO - ⚠️  THROTTLING flow flow_000158 (192.168.169.84:42020 -> 10.0.137.233:80) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:24,494 - __main__ - WARNING - 🚫 BLOCKING flow flow_000159 (192.168.235.54:44855 -> 10.0.108.71:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.328
+2025-10-10 16:45:24,634 - __main__ - WARNING - 🚫 BLOCKING flow flow_000160 (192.168.66.24:46659 -> 10.0.63.102:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.426
+2025-10-10 16:45:24,783 - __main__ - INFO - ⚠️  THROTTLING flow flow_000161 (192.168.202.8:56116 -> 10.0.174.249:21) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:24,935 - __main__ - WARNING - 🚫 BLOCKING flow flow_000162 (192.168.94.47:9050 -> 10.0.82.131:443) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:25,398 - __main__ - INFO - ⚠️  THROTTLING flow flow_000165 (192.168.78.25:43966 -> 10.0.34.32:53) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:25,856 - __main__ - INFO - ⚠️  THROTTLING flow flow_000168 (192.168.25.176:52436 -> 10.0.69.26:53) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:26,613 - __main__ - INFO - ⚠️  THROTTLING flow flow_000173 (192.168.28.1:4312 -> 10.0.118.141:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:28,219 - __main__ - INFO - ⚠️  THROTTLING flow flow_000184 (192.168.1.41:18817 -> 10.0.238.230:53) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:45:28,662 - __main__ - INFO - ⚠️  THROTTLING flow flow_000187 (192.168.73.83:38778 -> 10.0.150.88:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:28,964 - __main__ - WARNING - 🚫 BLOCKING flow flow_000189 (192.168.229.70:36119 -> 10.0.65.252:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.668
+2025-10-10 16:45:29,258 - __main__ - WARNING - 🚫 BLOCKING flow flow_000191 (192.168.118.51:29094 -> 10.0.227.227:22) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.308
+2025-10-10 16:45:30,141 - __main__ - INFO - ⚠️  THROTTLING flow flow_000197 (192.168.97.245:64422 -> 10.0.120.195:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:31,164 - __main__ - WARNING - 🚫 BLOCKING flow flow_000204 (192.168.54.1:53616 -> 10.0.176.26:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.398
+2025-10-10 16:45:31,625 - __main__ - INFO - ⚠️  THROTTLING flow flow_000207 (192.168.18.127:24905 -> 10.0.246.171:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:32,226 - __main__ - WARNING - 🚫 BLOCKING flow flow_000211 (192.168.196.94:3825 -> 10.0.136.71:25) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:32,820 - __main__ - WARNING - 🚫 BLOCKING flow flow_000215 (192.168.15.204:64560 -> 10.0.60.13:993) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.344
+2025-10-10 16:45:33,118 - __main__ - INFO - ⚠️  THROTTLING flow flow_000217 (192.168.74.71:57668 -> 10.0.132.226:993) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:33,267 - __main__ - INFO - ⚠️  THROTTLING flow flow_000218 (192.168.111.96:58059 -> 10.0.123.3:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:33,854 - __main__ - INFO - ⚠️  THROTTLING flow flow_000222 (192.168.65.127:22379 -> 10.0.186.61:993) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:34,004 - __main__ - INFO - ⚠️  THROTTLING flow flow_000223 (192.168.251.28:48718 -> 10.0.126.217:21) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:34,162 - __main__ - WARNING - 🚫 BLOCKING flow flow_000224 (192.168.15.183:53326 -> 10.0.183.202:995) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.437
+2025-10-10 16:45:34,303 - __main__ - WARNING - 🚫 BLOCKING flow flow_000225 (192.168.193.13:9124 -> 10.0.230.76:80) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:45:34,596 - __main__ - INFO - ⚠️  THROTTLING flow flow_000227 (192.168.136.18:1827 -> 10.0.89.239:22) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:45:34,741 - __main__ - INFO - ⚠️  THROTTLING flow flow_000228 (192.168.58.141:59774 -> 10.0.250.109:80) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:35,035 - __main__ - INFO - ⚠️  THROTTLING flow flow_000230 (192.168.23.157:46148 -> 10.0.74.57:443) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:35,188 - __main__ - WARNING - 🚫 BLOCKING flow flow_000231 (192.168.192.230:2996 -> 10.0.50.19:22) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.678
+2025-10-10 16:45:35,342 - __main__ - INFO - ⚠️  THROTTLING flow flow_000232 (192.168.84.121:46440 -> 10.0.42.98:80) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:35,481 - __main__ - INFO - ⚠️  THROTTLING flow flow_000233 (192.168.17.85:6844 -> 10.0.112.182:22) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:35,932 - __main__ - INFO - ⚠️  THROTTLING flow flow_000236 (192.168.173.8:63577 -> 10.0.10.230:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:45:36,398 - __main__ - INFO - ⚠️  THROTTLING flow flow_000239 (192.168.186.154:20297 -> 10.0.176.9:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:36,990 - __main__ - WARNING - 🚫 BLOCKING flow flow_000243 (192.168.14.75:38211 -> 10.0.215.19:22) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.650
+2025-10-10 16:45:37,581 - __main__ - INFO - ⚠️  THROTTLING flow flow_000247 (192.168.238.78:62634 -> 10.0.83.238:21) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:45:37,730 - __main__ - INFO - ⚠️  THROTTLING flow flow_000248 (192.168.22.216:13578 -> 10.0.193.50:80) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:45:38,152 - __main__ - INFO - ⚠️  THROTTLING flow flow_000251 (192.168.13.41:34563 -> 10.0.140.61:443) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:45:38,451 - __main__ - INFO - ⚠️  THROTTLING flow flow_000253 (192.168.65.217:39402 -> 10.0.51.69:995) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:45:38,610 - __main__ - WARNING - 🚫 BLOCKING flow flow_000254 (192.168.33.98:63287 -> 10.0.36.244:22) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.678
+2025-10-10 16:45:38,749 - __main__ - INFO - ⚠️  THROTTLING flow flow_000255 (192.168.16.152:19401 -> 10.0.233.146:53) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:45:38,888 - __main__ - INFO - ⚠️  THROTTLING flow flow_000256 (192.168.36.52:7536 -> 10.0.133.191:993) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:45:39,035 - __main__ - INFO - ⚠️  THROTTLING flow flow_000257 (192.168.50.246:19429 -> 10.0.158.205:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:39,183 - __main__ - INFO - ⚠️  THROTTLING flow flow_000258 (192.168.253.92:11116 -> 10.0.175.64:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:45:39,325 - __main__ - WARNING - 🚫 BLOCKING flow flow_000259 (192.168.112.55:34276 -> 10.0.185.252:443) - Class: Non-Tor, Confidence: 0.441, Anomaly: 0.797
+2025-10-10 16:45:39,476 - __main__ - INFO - ⚠️  THROTTLING flow flow_000260 (192.168.166.187:44974 -> 10.0.58.54:443) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:40,073 - __main__ - WARNING - 🚫 BLOCKING flow flow_000264 (192.168.80.186:20811 -> 10.0.157.171:443) - Class: Non-Tor, Confidence: 0.429, Anomaly: 0.053
+2025-10-10 16:45:40,221 - __main__ - WARNING - 🚫 BLOCKING flow flow_000265 (192.168.183.46:56653 -> 10.0.94.91:993) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.099
+2025-10-10 16:45:40,782 - __main__ - WARNING - 🚫 BLOCKING flow flow_000269 (192.168.169.221:5462 -> 10.0.145.19:21) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.083
+2025-10-10 16:45:40,923 - __main__ - INFO - ⚠️  THROTTLING flow flow_000270 (192.168.110.28:31949 -> 10.0.39.178:993) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:45:41,542 - __main__ - WARNING - 🚫 BLOCKING flow flow_000274 (192.168.30.22:63873 -> 10.0.149.129:22) - Class: Non-Tor, Confidence: 0.427, Anomaly: 0.034
+2025-10-10 16:45:41,850 - __main__ - INFO - ⚠️  THROTTLING flow flow_000276 (192.168.222.147:41227 -> 10.0.19.78:443) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:45:43,764 - __main__ - WARNING - 🚫 BLOCKING flow flow_000289 (192.168.43.203:23796 -> 10.0.153.251:993) - Class: Non-Tor, Confidence: 0.445, Anomaly: 0.434
+2025-10-10 16:45:44,242 - __main__ - INFO - ⚠️  THROTTLING flow flow_000292 (192.168.156.239:23812 -> 10.0.221.88:53) - Class: Non-Tor, Confidence: 0.340
+2025-10-10 16:45:44,385 - __main__ - INFO - ⚠️  THROTTLING flow flow_000293 (192.168.65.3:52676 -> 10.0.223.93:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:44,667 - __main__ - WARNING - 🚫 BLOCKING flow flow_000295 (192.168.244.244:63144 -> 10.0.188.148:21) - Class: Non-Tor, Confidence: 0.421, Anomaly: 0.064
+2025-10-10 16:45:45,094 - __main__ - INFO - ⚠️  THROTTLING flow flow_000298 (192.168.46.112:30439 -> 10.0.184.22:21) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:45,382 - __main__ - WARNING - 🚫 BLOCKING flow flow_000300 (192.168.108.41:14438 -> 10.0.212.183:80) - Class: Non-Tor, Confidence: 0.425, Anomaly: 0.051
+2025-10-10 16:45:45,671 - __main__ - INFO - ⚠️  THROTTLING flow flow_000302 (192.168.94.185:49547 -> 10.0.94.20:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:45,821 - __main__ - INFO - ⚠️  THROTTLING flow flow_000303 (192.168.3.10:5828 -> 10.0.184.119:80) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:45,968 - __main__ - WARNING - 🚫 BLOCKING flow flow_000304 (192.168.183.234:34914 -> 10.0.13.127:21) - Class: Non-Tor, Confidence: 0.429, Anomaly: 0.035
+2025-10-10 16:45:46,122 - __main__ - WARNING - 🚫 BLOCKING flow flow_000305 (192.168.243.246:1973 -> 10.0.121.173:21) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.092
+2025-10-10 16:45:47,758 - __main__ - INFO - ⚠️  THROTTLING flow flow_000316 (192.168.43.84:53774 -> 10.0.25.188:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:45:47,920 - __main__ - INFO - ⚠️  THROTTLING flow flow_000317 (192.168.188.170:1329 -> 10.0.156.127:53) - Class: Non-Tor, Confidence: 0.322
+2025-10-10 16:45:48,365 - __main__ - WARNING - 🚫 BLOCKING flow flow_000320 (192.168.174.59:18385 -> 10.0.63.239:25) - Class: Non-Tor, Confidence: 0.425, Anomaly: 0.053
+2025-10-10 16:45:48,653 - __main__ - INFO - ⚠️  THROTTLING flow flow_000322 (192.168.47.199:37742 -> 10.0.43.207:22) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:45:48,809 - __main__ - WARNING - 🚫 BLOCKING flow flow_000323 (192.168.96.59:58299 -> 10.0.1.98:53) - Class: Non-Tor, Confidence: 0.416, Anomaly: 0.179
+2025-10-10 16:45:49,404 - __main__ - WARNING - 🚫 BLOCKING flow flow_000327 (192.168.178.94:1817 -> 10.0.254.45:53) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.088
+2025-10-10 16:45:49,692 - __main__ - WARNING - 🚫 BLOCKING flow flow_000329 (192.168.225.25:17167 -> 10.0.50.168:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.334
+2025-10-10 16:45:49,840 - __main__ - INFO - ⚠️  THROTTLING flow flow_000330 (192.168.214.31:52482 -> 10.0.17.135:25) - Class: NonVPN, Confidence: 0.375
+2025-10-10 16:45:50,432 - __main__ - INFO - ⚠️  THROTTLING flow flow_000334 (192.168.166.78:61668 -> 10.0.200.115:443) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:45:50,581 - __main__ - WARNING - 🚫 BLOCKING flow flow_000335 (192.168.7.215:48000 -> 10.0.160.187:443) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.498
+2025-10-10 16:45:50,731 - __main__ - INFO - ⚠️  THROTTLING flow flow_000336 (192.168.88.108:23321 -> 10.0.131.26:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:50,875 - __main__ - INFO - ⚠️  THROTTLING flow flow_000337 (192.168.34.210:57840 -> 10.0.170.130:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:51,292 - __main__ - INFO - ⚠️  THROTTLING flow flow_000340 (192.168.94.16:9369 -> 10.0.224.155:22) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:45:51,723 - __main__ - INFO - ⚠️  THROTTLING flow flow_000343 (192.168.167.72:42685 -> 10.0.114.9:53) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:45:52,746 - __main__ - INFO - ⚠️  THROTTLING flow flow_000350 (192.168.227.85:49898 -> 10.0.88.5:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:52,904 - __main__ - WARNING - 🚫 BLOCKING flow flow_000351 (192.168.21.65:18762 -> 10.0.59.36:995) - Class: Non-Tor, Confidence: 0.419, Anomaly: 0.035
+2025-10-10 16:45:53,051 - __main__ - WARNING - 🚫 BLOCKING flow flow_000352 (192.168.234.141:28062 -> 10.0.164.182:22) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.088
+2025-10-10 16:45:53,638 - __main__ - INFO - ⚠️  THROTTLING flow flow_000356 (192.168.68.220:55954 -> 10.0.238.109:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:54,066 - __main__ - INFO - ⚠️  THROTTLING flow flow_000359 (192.168.118.24:64736 -> 10.0.223.244:443) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:45:54,354 - __main__ - INFO - ⚠️  THROTTLING flow flow_000361 (192.168.245.32:7433 -> 10.0.170.98:53) - Class: Non-Tor, Confidence: 0.444
+2025-10-10 16:45:54,654 - __main__ - INFO - ⚠️  THROTTLING flow flow_000363 (192.168.181.173:1198 -> 10.0.167.175:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:45:55,106 - __main__ - INFO - ⚠️  THROTTLING flow flow_000366 (192.168.118.14:7256 -> 10.0.104.252:443) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:45:55,847 - __main__ - INFO - ⚠️  THROTTLING flow flow_000371 (192.168.96.93:56408 -> 10.0.181.222:25) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:45:55,991 - __main__ - INFO - ⚠️  THROTTLING flow flow_000372 (192.168.189.30:55157 -> 10.0.185.178:22) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:45:56,413 - __main__ - WARNING - 🚫 BLOCKING flow flow_000375 (192.168.189.50:43653 -> 10.0.187.48:22) - Class: Non-Tor, Confidence: 0.444, Anomaly: 0.097
+2025-10-10 16:45:56,564 - __main__ - WARNING - 🚫 BLOCKING flow flow_000376 (192.168.217.144:43589 -> 10.0.153.197:53) - Class: Non-Tor, Confidence: 0.448, Anomaly: 0.097
+2025-10-10 16:45:57,137 - __main__ - INFO - ⚠️  THROTTLING flow flow_000380 (192.168.178.8:21441 -> 10.0.236.72:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:45:57,287 - __main__ - INFO - ⚠️  THROTTLING flow flow_000381 (192.168.83.15:24355 -> 10.0.189.249:995) - Class: Non-Tor, Confidence: 0.448
+2025-10-10 16:45:57,435 - __main__ - INFO - ⚠️  THROTTLING flow flow_000382 (192.168.18.167:22843 -> 10.0.65.172:995) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:45:58,179 - __main__ - INFO - ⚠️  THROTTLING flow flow_000387 (192.168.143.171:58006 -> 10.0.15.121:22) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:45:58,488 - __main__ - INFO - ⚠️  THROTTLING flow flow_000389 (192.168.236.37:47123 -> 10.0.204.70:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:45:59,849 - __main__ - INFO - ⚠️  THROTTLING flow flow_000398 (192.168.45.78:51489 -> 10.0.126.51:443) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:46:00,010 - __main__ - INFO - ⚠️  THROTTLING flow flow_000399 (192.168.153.67:52991 -> 10.0.217.132:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:46:00,296 - __main__ - INFO - ⚠️  THROTTLING flow flow_000401 (192.168.83.237:29624 -> 10.0.74.194:53) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:46:00,445 - __main__ - WARNING - 🚫 BLOCKING flow flow_000402 (192.168.175.60:1091 -> 10.0.195.252:993) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.094
+2025-10-10 16:46:00,890 - __main__ - WARNING - 🚫 BLOCKING flow flow_000405 (192.168.27.37:10868 -> 10.0.253.5:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.218
+2025-10-10 16:46:00,992 - __main__ - INFO - 🛑 Live detection system stopped
+2025-10-10 16:50:01,133 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:50:01,133 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:50:01,134 - __main__ - INFO - Loading joint NIDS model...
+2025-10-10 16:50:01,177 - __main__ - INFO - Joint model loaded successfully
+2025-10-10 16:50:01,177 - __main__ - INFO - Loading RL agent...
+2025-10-10 16:50:02,898 - src.agents.ppo_agent - INFO - PPO agent loaded from data/models/joint_rl_agent.pth
+2025-10-10 16:50:02,899 - __main__ - INFO - RL agent loaded successfully
+2025-10-10 16:50:02,899 - __main__ - INFO - Live NIDS Detector initialized successfully
+2025-10-10 16:50:02,899 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:50:02,900 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:50:02,900 - __main__ - INFO - Loading network flows from data/Darknet.CSV
+2025-10-10 16:50:02,900 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-10 16:50:02,900 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-10 16:50:02,900 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-10 16:50:05,589 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-10 16:50:05,590 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-10 16:50:05,627 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-10 16:50:05,661 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-10 16:50:05,661 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-10 16:50:05,680 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-10 16:50:05,680 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-10 16:50:05,722 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-10 16:50:05,722 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-10 16:50:05,892 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-10 16:50:06,244 - src.utils.data_preprocessing - INFO - Selected exactly 54 features out of 79
+2025-10-10 16:50:06,386 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-10 16:50:06,395 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-10 16:50:06,428 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-10 16:50:15,180 - __main__ - INFO - Loaded 141530 network flows
+2025-10-10 16:50:15,191 - __main__ - INFO - 🚀 Starting Live NIDS Detection System
+2025-10-10 16:50:15,192 - __main__ - INFO - 📊 Detection rate: 10 flows/second
+2025-10-10 16:50:15,382 - __main__ - WARNING - 🚫 BLOCKING flow flow_000001 (192.168.130.138:44206 -> 10.0.225.83:21) - Class: Non-Tor, Confidence: 0.416, Anomaly: 0.165
+2025-10-10 16:50:16,099 - __main__ - WARNING - 🚫 BLOCKING flow flow_000006 (192.168.232.216:11551 -> 10.0.137.30:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.749
+2025-10-10 16:50:16,240 - __main__ - INFO - ⚠️  THROTTLING flow flow_000007 (192.168.241.242:56929 -> 10.0.220.73:995) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:50:16,386 - __main__ - INFO - ⚠️  THROTTLING flow flow_000008 (192.168.76.232:1035 -> 10.0.174.55:21) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:50:16,523 - __main__ - WARNING - 🚫 BLOCKING flow flow_000009 (192.168.176.226:23925 -> 10.0.202.112:53) - Class: Non-Tor, Confidence: 0.439, Anomaly: 1.053
+2025-10-10 16:50:16,961 - __main__ - INFO - ⚠️  THROTTLING flow flow_000012 (192.168.191.232:41133 -> 10.0.106.2:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:17,237 - __main__ - INFO - ⚠️  THROTTLING flow flow_000014 (192.168.221.18:28957 -> 10.0.78.156:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:17,664 - __main__ - WARNING - 🚫 BLOCKING flow flow_000017 (192.168.126.135:47532 -> 10.0.24.24:993) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.687
+2025-10-10 16:50:17,978 - __main__ - WARNING - 🚫 BLOCKING flow flow_000019 (192.168.15.248:53162 -> 10.0.146.210:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.576
+2025-10-10 16:50:18,130 - __main__ - INFO - ⚠️  THROTTLING flow flow_000020 (192.168.122.101:60147 -> 10.0.78.213:80) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:18,267 - __main__ - INFO - ⚠️  THROTTLING flow flow_000021 (192.168.229.178:44199 -> 10.0.207.104:22) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:18,557 - __main__ - INFO - ⚠️  THROTTLING flow flow_000023 (192.168.254.37:29393 -> 10.0.254.57:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:18,857 - __main__ - WARNING - 🚫 BLOCKING flow flow_000025 (192.168.52.87:52461 -> 10.0.102.75:25) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.329
+2025-10-10 16:50:18,990 - __main__ - INFO - ⚠️  THROTTLING flow flow_000026 (192.168.217.192:23884 -> 10.0.99.247:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:19,132 - __main__ - INFO - ⚠️  THROTTLING flow flow_000027 (192.168.96.53:35603 -> 10.0.104.107:21) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:19,282 - __main__ - INFO - ⚠️  THROTTLING flow flow_000028 (192.168.113.162:18493 -> 10.0.60.158:993) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:50:19,438 - __main__ - INFO - ⚠️  THROTTLING flow flow_000029 (192.168.172.63:55489 -> 10.0.7.69:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:19,594 - __main__ - INFO - ⚠️  THROTTLING flow flow_000030 (192.168.103.46:46229 -> 10.0.33.150:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:19,747 - __main__ - INFO - ⚠️  THROTTLING flow flow_000031 (192.168.143.189:32790 -> 10.0.145.59:443) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:19,916 - __main__ - INFO - ⚠️  THROTTLING flow flow_000032 (192.168.177.203:41157 -> 10.0.226.77:22) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:20,062 - __main__ - INFO - ⚠️  THROTTLING flow flow_000033 (192.168.41.44:46877 -> 10.0.74.163:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:20,367 - __main__ - INFO - ⚠️  THROTTLING flow flow_000035 (192.168.80.97:22033 -> 10.0.239.189:21) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:20,523 - __main__ - INFO - ⚠️  THROTTLING flow flow_000036 (192.168.227.115:36080 -> 10.0.37.142:995) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:50:20,667 - __main__ - INFO - ⚠️  THROTTLING flow flow_000037 (192.168.52.99:41351 -> 10.0.92.233:22) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:20,815 - __main__ - INFO - ⚠️  THROTTLING flow flow_000038 (192.168.187.206:6390 -> 10.0.110.30:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:21,240 - __main__ - WARNING - 🚫 BLOCKING flow flow_000041 (192.168.204.159:60481 -> 10.0.42.187:995) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.348
+2025-10-10 16:50:21,377 - __main__ - INFO - ⚠️  THROTTLING flow flow_000042 (192.168.23.123:43276 -> 10.0.73.138:21) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:50:21,511 - __main__ - INFO - ⚠️  THROTTLING flow flow_000043 (192.168.202.130:3580 -> 10.0.168.205:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:21,666 - __main__ - WARNING - 🚫 BLOCKING flow flow_000044 (192.168.166.178:8676 -> 10.0.251.53:443) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.629
+2025-10-10 16:50:22,111 - __main__ - INFO - ⚠️  THROTTLING flow flow_000047 (192.168.15.9:2275 -> 10.0.170.60:25) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:22,266 - __main__ - INFO - ⚠️  THROTTLING flow flow_000048 (192.168.42.2:18153 -> 10.0.224.191:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:22,404 - __main__ - INFO - ⚠️  THROTTLING flow flow_000049 (192.168.246.167:5961 -> 10.0.84.94:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:22,547 - __main__ - INFO - ⚠️  THROTTLING flow flow_000050 (192.168.28.130:35762 -> 10.0.229.209:993) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:22,706 - __main__ - INFO - ⚠️  THROTTLING flow flow_000051 (192.168.251.122:16347 -> 10.0.36.87:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:22,860 - __main__ - INFO - ⚠️  THROTTLING flow flow_000052 (192.168.243.59:9842 -> 10.0.164.143:22) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:23,297 - __main__ - INFO - ⚠️  THROTTLING flow flow_000055 (192.168.81.94:10269 -> 10.0.109.57:995) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:23,441 - __main__ - INFO - ⚠️  THROTTLING flow flow_000056 (192.168.234.46:14394 -> 10.0.100.112:21) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:50:23,597 - __main__ - WARNING - 🚫 BLOCKING flow flow_000057 (192.168.105.246:20671 -> 10.0.91.46:25) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.392
+2025-10-10 16:50:24,030 - __main__ - INFO - ⚠️  THROTTLING flow flow_000060 (192.168.234.126:50000 -> 10.0.172.6:21) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:50:24,178 - __main__ - INFO - ⚠️  THROTTLING flow flow_000061 (192.168.43.107:60579 -> 10.0.34.200:995) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:24,474 - __main__ - INFO - ⚠️  THROTTLING flow flow_000063 (192.168.163.224:25463 -> 10.0.70.163:22) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:24,611 - __main__ - INFO - ⚠️  THROTTLING flow flow_000064 (192.168.33.80:54882 -> 10.0.212.108:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:24,762 - __main__ - WARNING - 🚫 BLOCKING flow flow_000065 (192.168.152.249:41650 -> 10.0.249.212:993) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.438
+2025-10-10 16:50:25,061 - __main__ - WARNING - 🚫 BLOCKING flow flow_000067 (192.168.135.148:41447 -> 10.0.159.250:80) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:25,506 - __main__ - INFO - ⚠️  THROTTLING flow flow_000070 (192.168.241.102:60287 -> 10.0.103.192:995) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:25,655 - __main__ - INFO - ⚠️  THROTTLING flow flow_000071 (192.168.86.213:64755 -> 10.0.219.169:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:25,798 - __main__ - WARNING - 🚫 BLOCKING flow flow_000072 (192.168.122.210:3886 -> 10.0.189.195:995) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.439
+2025-10-10 16:50:25,944 - __main__ - WARNING - 🚫 BLOCKING flow flow_000073 (192.168.192.157:8109 -> 10.0.225.14:21) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.427
+2025-10-10 16:50:26,107 - __main__ - WARNING - 🚫 BLOCKING flow flow_000074 (192.168.156.150:45410 -> 10.0.66.59:53) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.433
+2025-10-10 16:50:27,148 - __main__ - WARNING - 🚫 BLOCKING flow flow_000081 (192.168.128.190:22638 -> 10.0.173.103:22) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.451
+2025-10-10 16:50:27,290 - __main__ - INFO - ⚠️  THROTTLING flow flow_000082 (192.168.112.20:3787 -> 10.0.32.33:80) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:28,180 - __main__ - INFO - ⚠️  THROTTLING flow flow_000088 (192.168.4.198:3137 -> 10.0.2.38:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:28,333 - __main__ - INFO - ⚠️  THROTTLING flow flow_000089 (192.168.199.136:40004 -> 10.0.137.154:53) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:28,480 - __main__ - WARNING - 🚫 BLOCKING flow flow_000090 (192.168.193.242:31751 -> 10.0.182.169:80) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.294
+2025-10-10 16:50:28,782 - __main__ - INFO - ⚠️  THROTTLING flow flow_000092 (192.168.69.109:41269 -> 10.0.11.92:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:29,208 - __main__ - INFO - ⚠️  THROTTLING flow flow_000095 (192.168.16.213:54752 -> 10.0.243.39:80) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:29,346 - __main__ - INFO - ⚠️  THROTTLING flow flow_000096 (192.168.221.42:62914 -> 10.0.223.67:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:29,804 - __main__ - INFO - ⚠️  THROTTLING flow flow_000099 (192.168.196.57:45245 -> 10.0.235.111:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:30,097 - __main__ - INFO - ⚠️  THROTTLING flow flow_000101 (192.168.71.102:5232 -> 10.0.133.12:25) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:50:30,818 - __main__ - INFO - ⚠️  THROTTLING flow flow_000106 (192.168.72.144:19570 -> 10.0.8.6:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:30,968 - __main__ - WARNING - 🚫 BLOCKING flow flow_000107 (192.168.79.185:36007 -> 10.0.44.91:22) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.458
+2025-10-10 16:50:31,118 - __main__ - INFO - ⚠️  THROTTLING flow flow_000108 (192.168.34.5:49341 -> 10.0.183.92:80) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:31,269 - __main__ - INFO - ⚠️  THROTTLING flow flow_000109 (192.168.182.18:44648 -> 10.0.157.200:995) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:50:31,409 - __main__ - WARNING - 🚫 BLOCKING flow flow_000110 (192.168.140.239:12906 -> 10.0.216.129:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:31,567 - __main__ - INFO - ⚠️  THROTTLING flow flow_000111 (192.168.88.170:57274 -> 10.0.13.184:993) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:32,018 - __main__ - INFO - ⚠️  THROTTLING flow flow_000114 (192.168.156.232:16828 -> 10.0.120.31:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:32,164 - __main__ - INFO - ⚠️  THROTTLING flow flow_000115 (192.168.222.214:36697 -> 10.0.92.50:22) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:32,305 - __main__ - INFO - ⚠️  THROTTLING flow flow_000116 (192.168.104.251:5237 -> 10.0.17.104:25) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:32,587 - __main__ - INFO - ⚠️  THROTTLING flow flow_000118 (192.168.242.147:48162 -> 10.0.209.1:80) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:32,722 - __main__ - INFO - ⚠️  THROTTLING flow flow_000119 (192.168.228.5:53996 -> 10.0.39.133:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:33,327 - __main__ - INFO - ⚠️  THROTTLING flow flow_000123 (192.168.123.166:37643 -> 10.0.179.25:21) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:33,650 - __main__ - INFO - ⚠️  THROTTLING flow flow_000125 (192.168.196.26:6816 -> 10.0.31.77:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:33,802 - __main__ - INFO - ⚠️  THROTTLING flow flow_000126 (192.168.166.87:49138 -> 10.0.62.204:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:34,096 - __main__ - WARNING - 🚫 BLOCKING flow flow_000128 (192.168.40.223:10604 -> 10.0.233.11:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.619
+2025-10-10 16:50:34,827 - __main__ - INFO - ⚠️  THROTTLING flow flow_000133 (192.168.222.176:52089 -> 10.0.153.148:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:35,124 - __main__ - WARNING - 🚫 BLOCKING flow flow_000135 (192.168.243.83:10776 -> 10.0.151.78:995) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.612
+2025-10-10 16:50:35,266 - __main__ - WARNING - 🚫 BLOCKING flow flow_000136 (192.168.148.28:50248 -> 10.0.77.45:80) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.979
+2025-10-10 16:50:35,568 - __main__ - INFO - ⚠️  THROTTLING flow flow_000138 (192.168.126.101:12562 -> 10.0.130.32:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:35,718 - __main__ - INFO - ⚠️  THROTTLING flow flow_000139 (192.168.94.250:46372 -> 10.0.57.152:993) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:36,003 - __main__ - INFO - ⚠️  THROTTLING flow flow_000141 (192.168.161.55:63353 -> 10.0.4.12:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:36,148 - __main__ - WARNING - 🚫 BLOCKING flow flow_000142 (192.168.222.228:45888 -> 10.0.41.97:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.503
+2025-10-10 16:50:36,760 - __main__ - INFO - ⚠️  THROTTLING flow flow_000146 (192.168.230.73:54293 -> 10.0.17.25:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:37,634 - __main__ - WARNING - 🚫 BLOCKING flow flow_000152 (192.168.7.10:24602 -> 10.0.23.178:25) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:38,085 - __main__ - INFO - ⚠️  THROTTLING flow flow_000155 (192.168.99.173:54783 -> 10.0.58.208:995) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:38,247 - __main__ - INFO - ⚠️  THROTTLING flow flow_000156 (192.168.171.221:33676 -> 10.0.222.124:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:38,687 - __main__ - INFO - ⚠️  THROTTLING flow flow_000159 (192.168.218.102:22275 -> 10.0.61.241:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:38,983 - __main__ - INFO - ⚠️  THROTTLING flow flow_000161 (192.168.123.111:7848 -> 10.0.73.184:21) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:39,288 - __main__ - INFO - ⚠️  THROTTLING flow flow_000163 (192.168.211.170:2519 -> 10.0.243.91:993) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:39,426 - __main__ - INFO - ⚠️  THROTTLING flow flow_000164 (192.168.79.150:7225 -> 10.0.25.218:21) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:40,010 - __main__ - INFO - ⚠️  THROTTLING flow flow_000168 (192.168.218.201:25363 -> 10.0.103.178:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:50:40,162 - __main__ - INFO - ⚠️  THROTTLING flow flow_000169 (192.168.24.12:60472 -> 10.0.168.194:993) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:40,635 - __main__ - INFO - ⚠️  THROTTLING flow flow_000172 (192.168.69.188:45217 -> 10.0.56.236:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:40,787 - __main__ - INFO - ⚠️  THROTTLING flow flow_000173 (192.168.231.44:18726 -> 10.0.145.186:443) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:40,933 - __main__ - INFO - ⚠️  THROTTLING flow flow_000174 (192.168.98.110:27064 -> 10.0.212.12:80) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:41,097 - __main__ - INFO - ⚠️  THROTTLING flow flow_000175 (192.168.178.156:44621 -> 10.0.33.139:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:41,246 - __main__ - INFO - ⚠️  THROTTLING flow flow_000176 (192.168.102.210:50410 -> 10.0.134.165:80) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:50:41,388 - __main__ - WARNING - 🚫 BLOCKING flow flow_000177 (192.168.159.166:7379 -> 10.0.204.110:80) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.502
+2025-10-10 16:50:41,533 - __main__ - INFO - ⚠️  THROTTLING flow flow_000178 (192.168.225.150:39052 -> 10.0.115.29:80) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:50:41,685 - __main__ - INFO - ⚠️  THROTTLING flow flow_000179 (192.168.95.229:18327 -> 10.0.61.98:22) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:41,832 - __main__ - WARNING - 🚫 BLOCKING flow flow_000180 (192.168.157.134:7605 -> 10.0.54.11:21) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.330
+2025-10-10 16:50:41,981 - __main__ - INFO - ⚠️  THROTTLING flow flow_000181 (192.168.118.199:16162 -> 10.0.24.64:21) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:50:42,434 - __main__ - WARNING - 🚫 BLOCKING flow flow_000184 (192.168.245.220:42450 -> 10.0.21.87:25) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.293
+2025-10-10 16:50:43,155 - __main__ - INFO - ⚠️  THROTTLING flow flow_000189 (192.168.91.29:38593 -> 10.0.112.191:53) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:43,307 - __main__ - WARNING - 🚫 BLOCKING flow flow_000190 (192.168.81.30:3235 -> 10.0.25.251:25) - Class: Non-Tor, Confidence: 0.424, Anomaly: 0.515
+2025-10-10 16:50:43,609 - __main__ - WARNING - 🚫 BLOCKING flow flow_000192 (192.168.248.154:2430 -> 10.0.17.242:25) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.005
+2025-10-10 16:50:43,757 - __main__ - WARNING - 🚫 BLOCKING flow flow_000193 (192.168.205.211:49069 -> 10.0.138.142:22) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.432
+2025-10-10 16:50:43,914 - __main__ - WARNING - 🚫 BLOCKING flow flow_000194 (192.168.109.141:6448 -> 10.0.74.206:25) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.475
+2025-10-10 16:50:44,640 - __main__ - WARNING - 🚫 BLOCKING flow flow_000199 (192.168.155.57:64648 -> 10.0.225.37:21) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:44,792 - __main__ - INFO - ⚠️  THROTTLING flow flow_000200 (192.168.130.81:55343 -> 10.0.157.158:995) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:44,941 - __main__ - INFO - ⚠️  THROTTLING flow flow_000201 (192.168.226.184:63614 -> 10.0.121.205:21) - Class: Non-Tor, Confidence: 0.395
+2025-10-10 16:50:45,416 - __main__ - WARNING - 🚫 BLOCKING flow flow_000204 (192.168.61.142:61610 -> 10.0.119.183:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.398
+2025-10-10 16:50:45,573 - __main__ - INFO - ⚠️  THROTTLING flow flow_000205 (192.168.23.179:6743 -> 10.0.183.254:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:45,850 - __main__ - WARNING - 🚫 BLOCKING flow flow_000207 (192.168.219.170:29106 -> 10.0.76.43:443) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.699
+2025-10-10 16:50:46,474 - __main__ - WARNING - 🚫 BLOCKING flow flow_000211 (192.168.139.202:39777 -> 10.0.140.22:21) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:46,789 - __main__ - INFO - ⚠️  THROTTLING flow flow_000213 (192.168.210.61:35585 -> 10.0.103.57:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:46,948 - __main__ - INFO - ⚠️  THROTTLING flow flow_000214 (192.168.28.31:58657 -> 10.0.187.75:53) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:50:48,134 - __main__ - INFO - ⚠️  THROTTLING flow flow_000222 (192.168.41.173:56270 -> 10.0.8.134:993) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:48,580 - __main__ - WARNING - 🚫 BLOCKING flow flow_000225 (192.168.169.181:15084 -> 10.0.189.140:443) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:50:48,729 - __main__ - INFO - ⚠️  THROTTLING flow flow_000226 (192.168.210.140:32770 -> 10.0.173.87:80) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:50:48,877 - __main__ - WARNING - 🚫 BLOCKING flow flow_000227 (192.168.170.205:10546 -> 10.0.221.95:993) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.001
+2025-10-10 16:50:49,331 - __main__ - INFO - ⚠️  THROTTLING flow flow_000230 (192.168.55.125:26488 -> 10.0.108.196:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:50:49,485 - __main__ - WARNING - 🚫 BLOCKING flow flow_000231 (192.168.12.149:18384 -> 10.0.123.218:21) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.678
+2025-10-10 16:50:49,631 - __main__ - INFO - ⚠️  THROTTLING flow flow_000232 (192.168.128.70:3690 -> 10.0.13.71:22) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:49,940 - __main__ - INFO - ⚠️  THROTTLING flow flow_000234 (192.168.75.208:57900 -> 10.0.159.253:22) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:50,098 - __main__ - INFO - ⚠️  THROTTLING flow flow_000235 (192.168.230.238:3731 -> 10.0.247.136:21) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:50,391 - __main__ - INFO - ⚠️  THROTTLING flow flow_000237 (192.168.5.219:23426 -> 10.0.109.159:993) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:50,828 - __main__ - WARNING - 🚫 BLOCKING flow flow_000240 (192.168.219.208:39656 -> 10.0.36.22:21) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.940
+2025-10-10 16:50:51,139 - __main__ - WARNING - 🚫 BLOCKING flow flow_000242 (192.168.234.97:14942 -> 10.0.123.146:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.299
+2025-10-10 16:50:51,574 - __main__ - WARNING - 🚫 BLOCKING flow flow_000245 (192.168.78.56:36583 -> 10.0.94.8:993) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.699
+2025-10-10 16:50:51,719 - __main__ - INFO - ⚠️  THROTTLING flow flow_000246 (192.168.159.158:46617 -> 10.0.109.246:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:52,022 - __main__ - INFO - ⚠️  THROTTLING flow flow_000248 (192.168.75.17:59588 -> 10.0.212.51:443) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:52,480 - __main__ - INFO - ⚠️  THROTTLING flow flow_000251 (192.168.23.84:33364 -> 10.0.136.1:22) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:50:52,618 - __main__ - INFO - ⚠️  THROTTLING flow flow_000252 (192.168.93.5:63967 -> 10.0.249.83:995) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:50:52,763 - __main__ - WARNING - 🚫 BLOCKING flow flow_000253 (192.168.14.172:38254 -> 10.0.153.103:80) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.396
+2025-10-10 16:50:53,197 - __main__ - INFO - ⚠️  THROTTLING flow flow_000256 (192.168.24.156:58788 -> 10.0.82.249:25) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:50:54,108 - __main__ - INFO - ⚠️  THROTTLING flow flow_000262 (192.168.247.141:40986 -> 10.0.20.3:993) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:54,265 - __main__ - INFO - ⚠️  THROTTLING flow flow_000263 (192.168.53.211:52055 -> 10.0.85.14:25) - Class: Non-Tor, Confidence: 0.427
+2025-10-10 16:50:54,713 - __main__ - INFO - ⚠️  THROTTLING flow flow_000266 (192.168.31.231:58442 -> 10.0.214.169:21) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:50:54,866 - __main__ - WARNING - 🚫 BLOCKING flow flow_000267 (192.168.54.107:14668 -> 10.0.129.117:21) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.217
+2025-10-10 16:50:55,461 - __main__ - WARNING - 🚫 BLOCKING flow flow_000271 (192.168.234.143:39072 -> 10.0.60.18:22) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.231
+2025-10-10 16:50:55,604 - __main__ - WARNING - 🚫 BLOCKING flow flow_000272 (192.168.4.109:43972 -> 10.0.192.33:25) - Class: Non-Tor, Confidence: 0.442, Anomaly: 0.447
+2025-10-10 16:50:55,893 - __main__ - INFO - ⚠️  THROTTLING flow flow_000274 (192.168.230.24:20486 -> 10.0.159.163:443) - Class: Non-Tor, Confidence: 0.427
+2025-10-10 16:50:56,027 - __main__ - INFO - ⚠️  THROTTLING flow flow_000275 (192.168.153.128:14552 -> 10.0.253.178:993) - Class: Non-Tor, Confidence: 0.402
+2025-10-10 16:50:56,460 - __main__ - INFO - ⚠️  THROTTLING flow flow_000278 (192.168.147.239:10364 -> 10.0.47.61:53) - Class: Non-Tor, Confidence: 0.427
+2025-10-10 16:50:56,615 - __main__ - WARNING - 🚫 BLOCKING flow flow_000279 (192.168.251.116:61593 -> 10.0.215.70:25) - Class: Non-Tor, Confidence: 0.427, Anomaly: 0.032
+2025-10-10 16:50:56,750 - __main__ - WARNING - 🚫 BLOCKING flow flow_000280 (192.168.164.83:20784 -> 10.0.178.118:80) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.073
+2025-10-10 16:50:57,204 - __main__ - INFO - ⚠️  THROTTLING flow flow_000283 (192.168.58.107:50736 -> 10.0.214.212:21) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:50:57,644 - __main__ - INFO - ⚠️  THROTTLING flow flow_000286 (192.168.161.8:4341 -> 10.0.191.94:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:50:57,786 - __main__ - INFO - ⚠️  THROTTLING flow flow_000287 (192.168.236.154:18254 -> 10.0.161.186:995) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:50:58,087 - __main__ - INFO - ⚠️  THROTTLING flow flow_000289 (192.168.251.49:21051 -> 10.0.76.179:21) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:50:58,247 - __main__ - WARNING - 🚫 BLOCKING flow flow_000290 (192.168.233.3:43832 -> 10.0.67.55:80) - Class: VPN, Confidence: 0.385, Anomaly: 0.405
+2025-10-10 16:50:58,686 - __main__ - WARNING - 🚫 BLOCKING flow flow_000293 (192.168.250.187:17428 -> 10.0.135.55:993) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.070
+2025-10-10 16:50:58,830 - __main__ - INFO - ⚠️  THROTTLING flow flow_000294 (192.168.167.206:45924 -> 10.0.243.135:80) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:50:59,123 - __main__ - WARNING - 🚫 BLOCKING flow flow_000296 (192.168.13.41:7418 -> 10.0.51.188:443) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.136
+2025-10-10 16:50:59,592 - __main__ - INFO - ⚠️  THROTTLING flow flow_000299 (192.168.126.157:10579 -> 10.0.110.3:80) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:51:00,037 - __main__ - INFO - ⚠️  THROTTLING flow flow_000302 (192.168.23.119:10260 -> 10.0.43.26:21) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:51:00,181 - __main__ - INFO - ⚠️  THROTTLING flow flow_000303 (192.168.116.32:13279 -> 10.0.11.54:80) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:51:01,213 - __main__ - INFO - ⚠️  THROTTLING flow flow_000310 (192.168.79.98:17596 -> 10.0.36.122:995) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:51:01,366 - __main__ - INFO - ⚠️  THROTTLING flow flow_000311 (192.168.75.158:6076 -> 10.0.119.73:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:51:01,532 - __main__ - WARNING - 🚫 BLOCKING flow flow_000312 (192.168.191.172:24720 -> 10.0.59.76:25) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.082
+2025-10-10 16:51:01,834 - __main__ - INFO - ⚠️  THROTTLING flow flow_000314 (192.168.23.124:63229 -> 10.0.104.102:995) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:51:02,131 - __main__ - INFO - ⚠️  THROTTLING flow flow_000316 (192.168.250.60:62941 -> 10.0.97.53:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:51:02,437 - __main__ - INFO - ⚠️  THROTTLING flow flow_000318 (192.168.20.85:46835 -> 10.0.38.142:22) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:51:02,754 - __main__ - INFO - ⚠️  THROTTLING flow flow_000320 (192.168.71.116:14073 -> 10.0.195.186:443) - Class: Non-Tor, Confidence: 0.425
+2025-10-10 16:51:03,219 - __main__ - WARNING - 🚫 BLOCKING flow flow_000323 (192.168.252.217:12537 -> 10.0.249.242:995) - Class: Non-Tor, Confidence: 0.416, Anomaly: 0.179
+2025-10-10 16:51:03,368 - __main__ - INFO - ⚠️  THROTTLING flow flow_000324 (192.168.119.38:59984 -> 10.0.210.241:993) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:51:03,537 - __main__ - WARNING - 🚫 BLOCKING flow flow_000325 (192.168.120.203:65031 -> 10.0.35.22:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.064
+2025-10-10 16:51:03,701 - __main__ - WARNING - 🚫 BLOCKING flow flow_000326 (192.168.54.246:29410 -> 10.0.32.180:25) - Class: Non-Tor, Confidence: 0.445, Anomaly: 0.639
+2025-10-10 16:51:03,994 - __main__ - WARNING - 🚫 BLOCKING flow flow_000328 (192.168.140.21:53265 -> 10.0.222.59:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.070
+2025-10-10 16:51:05,169 - __main__ - INFO - ⚠️  THROTTLING flow flow_000336 (192.168.243.215:31317 -> 10.0.54.189:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:51:05,595 - __main__ - INFO - ⚠️  THROTTLING flow flow_000339 (192.168.24.14:29200 -> 10.0.240.96:443) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:51:05,747 - __main__ - WARNING - 🚫 BLOCKING flow flow_000340 (192.168.142.156:63295 -> 10.0.117.131:25) - Class: Non-Tor, Confidence: 0.442, Anomaly: 0.098
+2025-10-10 16:51:06,242 - __main__ - WARNING - 🚫 BLOCKING flow flow_000344 (192.168.55.138:46468 -> 10.0.62.49:21) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.254
+2025-10-10 16:51:06,534 - __main__ - INFO - ⚠️  THROTTLING flow flow_000346 (192.168.65.150:30833 -> 10.0.194.18:80) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:51:06,692 - __main__ - INFO - ⚠️  THROTTLING flow flow_000347 (192.168.226.235:44653 -> 10.0.48.210:22) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:51:07,185 - __main__ - WARNING - 🚫 BLOCKING flow flow_000350 (192.168.83.201:60505 -> 10.0.214.108:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.066
+2025-10-10 16:51:08,393 - __main__ - INFO - ⚠️  THROTTLING flow flow_000358 (192.168.214.228:25993 -> 10.0.14.157:993) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:51:08,542 - __main__ - INFO - ⚠️  THROTTLING flow flow_000359 (192.168.1.101:36187 -> 10.0.215.16:995) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:51:08,699 - __main__ - INFO - ⚠️  THROTTLING flow flow_000360 (192.168.27.181:62475 -> 10.0.184.151:21) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:51:09,142 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7000
+ * Running on http://10.0.24.7:7000
+2025-10-10 16:51:09,142 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-10-10 16:51:09,601 - __main__ - WARNING - 🚫 BLOCKING flow flow_000366 (192.168.50.208:2717 -> 10.0.198.45:995) - Class: Non-Tor, Confidence: 0.447, Anomaly: 0.110
+2025-10-10 16:51:09,750 - __main__ - WARNING - 🚫 BLOCKING flow flow_000367 (192.168.149.52:41610 -> 10.0.124.132:443) - Class: Non-Tor, Confidence: 0.448, Anomaly: 0.092
+2025-10-10 16:51:10,031 - __main__ - INFO - ⚠️  THROTTLING flow flow_000369 (192.168.65.212:34823 -> 10.0.173.101:21) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:51:10,348 - __main__ - INFO - ⚠️  THROTTLING flow flow_000371 (192.168.47.253:49212 -> 10.0.11.152:21) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:51:10,488 - __main__ - INFO - ⚠️  THROTTLING flow flow_000372 (192.168.221.161:10960 -> 10.0.111.163:80) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:51:10,796 - __main__ - INFO - ⚠️  THROTTLING flow flow_000374 (192.168.249.244:55155 -> 10.0.3.6:53) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:51:10,940 - __main__ - INFO - ⚠️  THROTTLING flow flow_000375 (192.168.130.101:55507 -> 10.0.76.27:443) - Class: Non-Tor, Confidence: 0.444
+2025-10-10 16:51:11,252 - __main__ - INFO - ⚠️  THROTTLING flow flow_000377 (192.168.62.110:32120 -> 10.0.156.155:993) - Class: Non-Tor, Confidence: 0.448
+2025-10-10 16:51:11,406 - __main__ - INFO - ⚠️  THROTTLING flow flow_000378 (192.168.105.115:63793 -> 10.0.96.131:22) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:51:12,033 - __main__ - INFO - ⚠️  THROTTLING flow flow_000382 (192.168.41.229:65467 -> 10.0.177.56:22) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:51:12,340 - __main__ - INFO - ⚠️  THROTTLING flow flow_000384 (192.168.28.19:42204 -> 10.0.103.246:995) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:51:12,638 - __main__ - INFO - ⚠️  THROTTLING flow flow_000386 (192.168.134.161:59852 -> 10.0.149.166:80) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:51:13,395 - __main__ - INFO - ⚠️  THROTTLING flow flow_000391 (192.168.24.43:30541 -> 10.0.168.129:80) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:51:13,993 - __main__ - INFO - ⚠️  THROTTLING flow flow_000395 (192.168.130.75:36206 -> 10.0.38.182:25) - Class: Non-Tor, Confidence: 0.415
+2025-10-10 16:51:14,143 - __main__ - INFO - ⚠️  THROTTLING flow flow_000396 (192.168.196.7:27193 -> 10.0.15.134:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:51:14,297 - __main__ - INFO - ⚠️  THROTTLING flow flow_000397 (192.168.217.148:64022 -> 10.0.91.171:993) - Class: Non-Tor, Confidence: 0.446
+2025-10-10 16:51:15,290 - __main__ - INFO - 🛑 Live detection system stopped
+2025-10-10 16:51:15,321 - __main__ - INFO - 💾 Detection results saved to logs/detection_results_20251010_165115.json
+2025-10-10 16:51:28,694 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:28] "GET / HTTP/1.1" 200 -
+2025-10-10 16:51:29,140 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:29] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:29,176 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:29] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:31,209 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:31] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:31,248 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:31] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:33,160 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:33] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:33,162 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:33] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:34,450 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:34] "GET / HTTP/1.1" 200 -
+2025-10-10 16:51:34,733 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:34] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:34,776 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:34] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:36,796 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:36] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:36,797 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:36] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:38,744 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:38] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:38,786 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:38] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:40,762 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:40] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:40,801 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:40] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:42,779 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:42] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:42,781 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:42] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:44,741 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:44] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:44,782 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:44] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:46,796 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:46] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:46,834 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:46] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:48,763 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:48] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:48,765 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:48] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:50,783 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:50] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:50,786 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:50] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:52,780 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:52] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:52,782 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:52] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:54,551 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:51:54,552 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:51:54,552 - __main__ - INFO - Loading joint NIDS model...
+2025-10-10 16:51:54,597 - __main__ - INFO - Joint model loaded successfully
+2025-10-10 16:51:54,598 - __main__ - INFO - Loading RL agent...
+2025-10-10 16:51:54,734 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:54] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:54,777 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:54] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:56,339 - src.agents.ppo_agent - INFO - PPO agent loaded from data/models/joint_rl_agent.pth
+2025-10-10 16:51:56,339 - __main__ - INFO - RL agent loaded successfully
+2025-10-10 16:51:56,339 - __main__ - INFO - Live NIDS Detector initialized successfully
+2025-10-10 16:51:56,339 - src.utils.data_preprocessing - INFO - Data preprocessor initialized with standard normalization
+2025-10-10 16:51:56,340 - src.utils.data_preprocessing - INFO - Preprocessor loaded from data/models/joint_preprocessor.pkl
+2025-10-10 16:51:56,340 - __main__ - INFO - Loading network flows from data/Darknet.CSV
+2025-10-10 16:51:56,340 - src.utils.data_preprocessing - INFO - Loading CIC-Darknet2020 dataset from data/Darknet.CSV
+2025-10-10 16:51:56,340 - src.utils.data_preprocessing - INFO - Found 1 CSV file(s) to load
+2025-10-10 16:51:56,340 - src.utils.data_preprocessing - INFO - Loading data/Darknet.CSV...
+2025-10-10 16:51:56,916 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:56] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:56,917 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:56] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:58,152 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:58] "GET / HTTP/1.1" 200 -
+2025-10-10 16:51:58,410 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:58] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:51:58,411 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:51:58] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:51:59,073 - src.utils.data_preprocessing - INFO - Successfully loaded 141530 samples from data/Darknet.CSV
+2025-10-10 16:51:59,074 - src.utils.data_preprocessing - INFO - Combined dataset shape: (141530, 85)
+2025-10-10 16:51:59,111 - src.utils.data_preprocessing - INFO - Removing 5 non-numeric columns: ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Label.1']...
+2025-10-10 16:51:59,144 - src.utils.data_preprocessing - INFO - Features shape: (141530, 79), Labels shape: (141530,)
+2025-10-10 16:51:59,144 - src.utils.data_preprocessing - INFO - Using 79 numeric features for training
+2025-10-10 16:51:59,163 - src.utils.data_preprocessing - INFO - Preprocessing features with shape: (141530, 79)
+2025-10-10 16:51:59,163 - src.utils.data_preprocessing - INFO - Cleaning data - handling infinite values and outliers...
+2025-10-10 16:51:59,208 - src.utils.data_preprocessing - WARNING - Found 51 infinite values, replacing...
+2025-10-10 16:51:59,209 - src.utils.data_preprocessing - WARNING - Found 47 NaN values, replacing...
+2025-10-10 16:51:59,389 - src.utils.data_preprocessing - INFO - Data cleaning completed
+2025-10-10 16:51:59,742 - src.utils.data_preprocessing - INFO - Selected exactly 54 features out of 79
+2025-10-10 16:51:59,885 - src.utils.data_preprocessing - INFO - Preprocessed features shape: (141530, 54)
+2025-10-10 16:51:59,895 - src.utils.data_preprocessing - INFO - Preprocessing labels with shape: (141530,)
+2025-10-10 16:51:59,931 - src.utils.data_preprocessing - INFO - Label classes: ['Non-Tor', 'NonVPN', 'Tor', 'VPN']
+2025-10-10 16:52:00,413 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:00] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:00,415 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:00] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:02,459 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:02] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:02,461 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:02] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:04,771 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:04] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:04,808 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:04] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:06,761 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:06] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:06,764 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:06] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:08,513 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:08] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:08,552 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:08] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:10,426 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:10] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:10,427 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:10] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:11,988 - __main__ - INFO - Loaded 141530 network flows
+2025-10-10 16:52:12,002 - __main__ - INFO - 🚀 Starting Live NIDS Detection System
+2025-10-10 16:52:12,002 - __main__ - INFO - 📊 Detection rate: 10 flows/second
+2025-10-10 16:52:12,051 - __main__ - WARNING - 🚫 BLOCKING flow flow_000000 (192.168.171.219:61525 -> 10.0.82.184:80) - Class: Non-Tor, Confidence: 0.418, Anomaly: 0.161
+2025-10-10 16:52:12,196 - __main__ - INFO - ⚠️  THROTTLING flow flow_000001 (192.168.128.75:40094 -> 10.0.77.71:993) - Class: Non-Tor, Confidence: 0.416
+2025-10-10 16:52:12,405 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:12] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:12,446 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:12] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:12,505 - __main__ - WARNING - 🚫 BLOCKING flow flow_000003 (192.168.72.194:17851 -> 10.0.185.89:25) - Class: Non-Tor, Confidence: 0.422, Anomaly: 0.146
+2025-10-10 16:52:12,785 - __main__ - INFO - ⚠️  THROTTLING flow flow_000005 (192.168.200.60:39509 -> 10.0.202.6:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:12,929 - __main__ - INFO - ⚠️  THROTTLING flow flow_000006 (192.168.37.45:29409 -> 10.0.99.136:80) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:13,242 - __main__ - INFO - ⚠️  THROTTLING flow flow_000008 (192.168.19.189:46515 -> 10.0.136.165:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:13,536 - __main__ - INFO - ⚠️  THROTTLING flow flow_000010 (192.168.251.110:37991 -> 10.0.98.226:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:13,831 - __main__ - WARNING - 🚫 BLOCKING flow flow_000012 (192.168.48.132:52237 -> 10.0.207.119:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:13,982 - __main__ - INFO - ⚠️  THROTTLING flow flow_000013 (192.168.148.107:36559 -> 10.0.203.123:443) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:14,121 - __main__ - WARNING - 🚫 BLOCKING flow flow_000014 (192.168.175.102:17492 -> 10.0.88.79:53) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.288
+2025-10-10 16:52:14,265 - __main__ - WARNING - 🚫 BLOCKING flow flow_000015 (192.168.33.233:62663 -> 10.0.227.149:443) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.269
+2025-10-10 16:52:14,430 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:14] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:14,431 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:14] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:14,536 - __main__ - INFO - ⚠️  THROTTLING flow flow_000017 (192.168.214.65:25776 -> 10.0.111.230:443) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:14,704 - __main__ - INFO - ⚠️  THROTTLING flow flow_000018 (192.168.208.50:53079 -> 10.0.222.40:80) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:14,996 - __main__ - WARNING - 🚫 BLOCKING flow flow_000020 (192.168.225.29:46042 -> 10.0.173.43:80) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.697
+2025-10-10 16:52:15,139 - __main__ - INFO - ⚠️  THROTTLING flow flow_000021 (192.168.133.173:60235 -> 10.0.239.70:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:15,430 - __main__ - INFO - ⚠️  THROTTLING flow flow_000023 (192.168.92.46:21499 -> 10.0.147.104:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:15,697 - __main__ - INFO - ⚠️  THROTTLING flow flow_000025 (192.168.156.3:35181 -> 10.0.204.12:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:16,162 - __main__ - INFO - ⚠️  THROTTLING flow flow_000028 (192.168.5.235:16121 -> 10.0.220.224:25) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:16,416 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:16] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:16,457 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:16] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:16,472 - __main__ - INFO - ⚠️  THROTTLING flow flow_000030 (192.168.53.150:49944 -> 10.0.94.195:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:16,618 - __main__ - INFO - ⚠️  THROTTLING flow flow_000031 (192.168.157.97:30195 -> 10.0.92.52:22) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:16,767 - __main__ - INFO - ⚠️  THROTTLING flow flow_000032 (192.168.176.166:37014 -> 10.0.204.239:53) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:16,920 - __main__ - INFO - ⚠️  THROTTLING flow flow_000033 (192.168.94.161:56073 -> 10.0.173.168:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:17,051 - __main__ - INFO - ⚠️  THROTTLING flow flow_000034 (192.168.186.94:14217 -> 10.0.20.91:993) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:17,185 - __main__ - INFO - ⚠️  THROTTLING flow flow_000035 (192.168.81.72:64757 -> 10.0.162.92:443) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:17,748 - __main__ - INFO - ⚠️  THROTTLING flow flow_000039 (192.168.7.94:48180 -> 10.0.118.22:80) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:52:17,883 - __main__ - INFO - ⚠️  THROTTLING flow flow_000040 (192.168.164.51:25550 -> 10.0.98.190:993) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:52:18,027 - __main__ - WARNING - 🚫 BLOCKING flow flow_000041 (192.168.101.240:51883 -> 10.0.160.153:80) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.348
+2025-10-10 16:52:18,173 - __main__ - INFO - ⚠️  THROTTLING flow flow_000042 (192.168.201.11:17694 -> 10.0.121.212:995) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:18,322 - __main__ - INFO - ⚠️  THROTTLING flow flow_000043 (192.168.160.143:28671 -> 10.0.79.75:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:18,443 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:18] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:18,445 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:18] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:18,463 - __main__ - WARNING - 🚫 BLOCKING flow flow_000044 (192.168.210.132:46994 -> 10.0.60.6:53) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.629
+2025-10-10 16:52:18,604 - __main__ - WARNING - 🚫 BLOCKING flow flow_000045 (192.168.164.233:8144 -> 10.0.237.208:22) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.813
+2025-10-10 16:52:18,748 - __main__ - INFO - ⚠️  THROTTLING flow flow_000046 (192.168.129.209:30503 -> 10.0.39.17:53) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:52:18,884 - __main__ - INFO - ⚠️  THROTTLING flow flow_000047 (192.168.101.121:52668 -> 10.0.107.143:25) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:19,036 - __main__ - INFO - ⚠️  THROTTLING flow flow_000048 (192.168.33.25:57438 -> 10.0.33.71:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:19,448 - __main__ - INFO - ⚠️  THROTTLING flow flow_000051 (192.168.161.77:60995 -> 10.0.79.124:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:19,591 - __main__ - WARNING - 🚫 BLOCKING flow flow_000052 (192.168.206.177:30728 -> 10.0.132.84:21) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.644
+2025-10-10 16:52:20,056 - __main__ - WARNING - 🚫 BLOCKING flow flow_000055 (192.168.254.182:6282 -> 10.0.238.111:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.365
+2025-10-10 16:52:20,215 - __main__ - WARNING - 🚫 BLOCKING flow flow_000056 (192.168.143.143:37102 -> 10.0.183.101:22) - Class: Non-Tor, Confidence: 0.423, Anomaly: 0.706
+2025-10-10 16:52:20,404 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:20] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:20,406 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:20] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:20,514 - __main__ - INFO - ⚠️  THROTTLING flow flow_000058 (192.168.81.14:45492 -> 10.0.230.81:22) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:20,649 - __main__ - WARNING - 🚫 BLOCKING flow flow_000059 (192.168.53.38:17915 -> 10.0.210.50:53) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.476
+2025-10-10 16:52:20,949 - __main__ - WARNING - 🚫 BLOCKING flow flow_000061 (192.168.60.211:24967 -> 10.0.119.158:25) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.781
+2025-10-10 16:52:21,097 - __main__ - INFO - ⚠️  THROTTLING flow flow_000062 (192.168.147.182:55612 -> 10.0.224.34:53) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:52:21,248 - __main__ - INFO - ⚠️  THROTTLING flow flow_000063 (192.168.181.107:34849 -> 10.0.48.236:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:21,401 - __main__ - INFO - ⚠️  THROTTLING flow flow_000064 (192.168.186.220:3040 -> 10.0.116.160:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:21,543 - __main__ - WARNING - 🚫 BLOCKING flow flow_000065 (192.168.20.16:25796 -> 10.0.147.87:53) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.438
+2025-10-10 16:52:21,696 - __main__ - WARNING - 🚫 BLOCKING flow flow_000066 (192.168.4.134:9645 -> 10.0.192.155:80) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.297
+2025-10-10 16:52:21,842 - __main__ - INFO - ⚠️  THROTTLING flow flow_000067 (192.168.240.84:9945 -> 10.0.124.247:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:21,994 - __main__ - INFO - ⚠️  THROTTLING flow flow_000068 (192.168.159.28:1890 -> 10.0.197.137:25) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:22,409 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:22] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:22,409 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:22] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:22,545 - __main__ - INFO - ⚠️  THROTTLING flow flow_000072 (192.168.2.207:62251 -> 10.0.20.172:53) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:22,823 - __main__ - INFO - ⚠️  THROTTLING flow flow_000074 (192.168.120.68:46147 -> 10.0.191.168:80) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:22,959 - __main__ - WARNING - 🚫 BLOCKING flow flow_000075 (192.168.31.74:27463 -> 10.0.134.213:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.294
+2025-10-10 16:52:23,096 - __main__ - INFO - ⚠️  THROTTLING flow flow_000076 (192.168.69.137:63656 -> 10.0.195.65:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:23,379 - __main__ - INFO - ⚠️  THROTTLING flow flow_000078 (192.168.252.74:19964 -> 10.0.16.151:21) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:23,679 - __main__ - WARNING - 🚫 BLOCKING flow flow_000080 (192.168.231.158:23587 -> 10.0.189.64:53) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.447
+2025-10-10 16:52:23,811 - __main__ - INFO - ⚠️  THROTTLING flow flow_000081 (192.168.249.204:28811 -> 10.0.208.120:995) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:52:23,940 - __main__ - INFO - ⚠️  THROTTLING flow flow_000082 (192.168.129.248:19886 -> 10.0.81.3:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:24,252 - __main__ - INFO - ⚠️  THROTTLING flow flow_000084 (192.168.230.161:23345 -> 10.0.117.142:53) - Class: Non-Tor, Confidence: 0.423
+2025-10-10 16:52:24,407 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:24] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:24,445 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:24] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:24,717 - __main__ - WARNING - 🚫 BLOCKING flow flow_000087 (192.168.166.100:56260 -> 10.0.252.136:25) - Class: Non-Tor, Confidence: 0.433, Anomaly: 0.796
+2025-10-10 16:52:25,142 - __main__ - WARNING - 🚫 BLOCKING flow flow_000090 (192.168.172.98:4772 -> 10.0.79.83:995) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.294
+2025-10-10 16:52:25,297 - __main__ - WARNING - 🚫 BLOCKING flow flow_000091 (192.168.20.104:5263 -> 10.0.50.33:443) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.334
+2025-10-10 16:52:25,442 - __main__ - INFO - ⚠️  THROTTLING flow flow_000092 (192.168.105.167:48115 -> 10.0.43.132:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:25,889 - __main__ - WARNING - 🚫 BLOCKING flow flow_000095 (192.168.196.254:33006 -> 10.0.63.52:80) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.491
+2025-10-10 16:52:26,415 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:26] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:26,456 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:26] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:26,462 - __main__ - INFO - ⚠️  THROTTLING flow flow_000099 (192.168.240.52:14497 -> 10.0.208.89:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:26,602 - __main__ - INFO - ⚠️  THROTTLING flow flow_000100 (192.168.7.192:47018 -> 10.0.195.115:21) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:26,901 - __main__ - INFO - ⚠️  THROTTLING flow flow_000102 (192.168.186.34:21382 -> 10.0.199.77:53) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:27,044 - __main__ - WARNING - 🚫 BLOCKING flow flow_000103 (192.168.177.223:65081 -> 10.0.96.45:995) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.613
+2025-10-10 16:52:27,342 - __main__ - INFO - ⚠️  THROTTLING flow flow_000105 (192.168.208.72:31445 -> 10.0.133.113:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:27,483 - __main__ - INFO - ⚠️  THROTTLING flow flow_000106 (192.168.2.72:43989 -> 10.0.55.36:80) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:27,762 - __main__ - INFO - ⚠️  THROTTLING flow flow_000108 (192.168.248.109:63840 -> 10.0.239.116:443) - Class: Non-Tor, Confidence: 0.433
+2025-10-10 16:52:27,905 - __main__ - INFO - ⚠️  THROTTLING flow flow_000109 (192.168.89.65:3082 -> 10.0.7.251:993) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:52:28,072 - __main__ - INFO - ⚠️  THROTTLING flow flow_000110 (192.168.34.230:50950 -> 10.0.27.206:995) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:28,218 - __main__ - INFO - ⚠️  THROTTLING flow flow_000111 (192.168.103.110:32449 -> 10.0.2.23:993) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:28,362 - __main__ - INFO - ⚠️  THROTTLING flow flow_000112 (192.168.141.60:35155 -> 10.0.147.185:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:28,404 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:28] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:28,444 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:28] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:28,508 - __main__ - INFO - ⚠️  THROTTLING flow flow_000113 (192.168.200.32:63094 -> 10.0.83.1:443) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:28,661 - __main__ - WARNING - 🚫 BLOCKING flow flow_000114 (192.168.166.1:44880 -> 10.0.176.145:22) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.636
+2025-10-10 16:52:28,969 - __main__ - WARNING - 🚫 BLOCKING flow flow_000116 (192.168.201.54:45648 -> 10.0.74.201:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 1.086
+2025-10-10 16:52:29,119 - __main__ - INFO - ⚠️  THROTTLING flow flow_000117 (192.168.45.122:51963 -> 10.0.130.93:21) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:29,262 - __main__ - INFO - ⚠️  THROTTLING flow flow_000118 (192.168.44.225:8991 -> 10.0.136.182:22) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:29,425 - __main__ - WARNING - 🚫 BLOCKING flow flow_000119 (192.168.39.174:23055 -> 10.0.110.183:995) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.422
+2025-10-10 16:52:29,561 - __main__ - INFO - ⚠️  THROTTLING flow flow_000120 (192.168.211.173:48706 -> 10.0.228.108:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:29,854 - __main__ - INFO - ⚠️  THROTTLING flow flow_000122 (192.168.181.63:7473 -> 10.0.5.75:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:29,990 - __main__ - INFO - ⚠️  THROTTLING flow flow_000123 (192.168.37.149:32073 -> 10.0.28.51:993) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:30,133 - __main__ - WARNING - 🚫 BLOCKING flow flow_000124 (192.168.46.47:56118 -> 10.0.49.242:25) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.418
+2025-10-10 16:52:30,405 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:30] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:30,433 - __main__ - WARNING - 🚫 BLOCKING flow flow_000126 (192.168.158.79:37741 -> 10.0.209.231:22) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:30,441 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:30] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:30,583 - __main__ - WARNING - 🚫 BLOCKING flow flow_000127 (192.168.92.1:48758 -> 10.0.227.188:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.484
+2025-10-10 16:52:31,022 - __main__ - WARNING - 🚫 BLOCKING flow flow_000130 (192.168.123.50:27872 -> 10.0.136.39:443) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.753
+2025-10-10 16:52:31,177 - __main__ - WARNING - 🚫 BLOCKING flow flow_000131 (192.168.192.66:44211 -> 10.0.83.161:993) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.469
+2025-10-10 16:52:31,481 - __main__ - INFO - ⚠️  THROTTLING flow flow_000133 (192.168.224.223:11622 -> 10.0.120.188:53) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:31,902 - __main__ - INFO - ⚠️  THROTTLING flow flow_000136 (192.168.251.121:34001 -> 10.0.14.212:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:32,060 - __main__ - WARNING - 🚫 BLOCKING flow flow_000137 (192.168.234.153:33411 -> 10.0.186.205:53) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.747
+2025-10-10 16:52:32,201 - __main__ - WARNING - 🚫 BLOCKING flow flow_000138 (192.168.198.95:52268 -> 10.0.59.22:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.303
+2025-10-10 16:52:32,446 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:32] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:32,447 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:32] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:32,631 - __main__ - WARNING - 🚫 BLOCKING flow flow_000141 (192.168.60.66:1792 -> 10.0.79.16:53) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:32,784 - __main__ - INFO - ⚠️  THROTTLING flow flow_000142 (192.168.218.49:19695 -> 10.0.76.84:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:33,347 - __main__ - WARNING - 🚫 BLOCKING flow flow_000146 (192.168.179.222:56261 -> 10.0.21.190:80) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.752
+2025-10-10 16:52:33,638 - __main__ - INFO - ⚠️  THROTTLING flow flow_000148 (192.168.96.133:13439 -> 10.0.144.130:443) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:33,780 - __main__ - INFO - ⚠️  THROTTLING flow flow_000149 (192.168.63.81:27489 -> 10.0.153.98:53) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:34,064 - __main__ - WARNING - 🚫 BLOCKING flow flow_000151 (192.168.147.152:17343 -> 10.0.153.171:21) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.296
+2025-10-10 16:52:34,363 - __main__ - INFO - ⚠️  THROTTLING flow flow_000153 (192.168.193.180:46693 -> 10.0.213.118:995) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:34,404 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:34] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:34,406 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:34] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:34,652 - __main__ - INFO - ⚠️  THROTTLING flow flow_000155 (192.168.118.83:54422 -> 10.0.24.26:22) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:34,798 - __main__ - INFO - ⚠️  THROTTLING flow flow_000156 (192.168.143.191:4370 -> 10.0.207.42:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:34,937 - __main__ - WARNING - 🚫 BLOCKING flow flow_000157 (192.168.58.148:3596 -> 10.0.161.189:53) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.412
+2025-10-10 16:52:35,072 - __main__ - INFO - ⚠️  THROTTLING flow flow_000158 (192.168.120.135:26282 -> 10.0.46.40:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:35,219 - __main__ - INFO - ⚠️  THROTTLING flow flow_000159 (192.168.215.223:26492 -> 10.0.133.157:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:35,366 - __main__ - INFO - ⚠️  THROTTLING flow flow_000160 (192.168.242.19:18891 -> 10.0.193.1:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:35,671 - __main__ - WARNING - 🚫 BLOCKING flow flow_000162 (192.168.198.174:47343 -> 10.0.90.114:993) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:35,806 - __main__ - INFO - ⚠️  THROTTLING flow flow_000163 (192.168.102.11:19493 -> 10.0.120.247:995) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:36,085 - __main__ - INFO - ⚠️  THROTTLING flow flow_000165 (192.168.45.117:5770 -> 10.0.115.137:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:36,521 - __main__ - INFO - ⚠️  THROTTLING flow flow_000168 (192.168.10.150:62392 -> 10.0.67.83:80) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:36,656 - __main__ - INFO - ⚠️  THROTTLING flow flow_000169 (192.168.192.189:62671 -> 10.0.169.226:21) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:52:36,667 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:36] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:36,669 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:36] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:36,941 - __main__ - INFO - ⚠️  THROTTLING flow flow_000171 (192.168.42.199:23827 -> 10.0.28.69:53) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:37,225 - __main__ - WARNING - 🚫 BLOCKING flow flow_000173 (192.168.156.237:14894 -> 10.0.26.138:21) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.685
+2025-10-10 16:52:37,523 - __main__ - INFO - ⚠️  THROTTLING flow flow_000175 (192.168.250.12:15057 -> 10.0.220.147:993) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:37,668 - __main__ - WARNING - 🚫 BLOCKING flow flow_000176 (192.168.211.206:25534 -> 10.0.172.232:22) - Class: Non-Tor, Confidence: 0.442, Anomaly: 0.895
+2025-10-10 16:52:37,826 - __main__ - INFO - ⚠️  THROTTLING flow flow_000177 (192.168.63.62:2405 -> 10.0.170.15:21) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:52:38,096 - __main__ - INFO - ⚠️  THROTTLING flow flow_000179 (192.168.59.34:50666 -> 10.0.198.241:25) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:38,236 - __main__ - INFO - ⚠️  THROTTLING flow flow_000180 (192.168.249.167:14242 -> 10.0.60.250:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:38,389 - __main__ - INFO - ⚠️  THROTTLING flow flow_000181 (192.168.42.60:40270 -> 10.0.173.74:443) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:38,445 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:38] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:38,446 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:38] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:38,540 - __main__ - WARNING - 🚫 BLOCKING flow flow_000182 (192.168.157.45:23279 -> 10.0.136.41:80) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.621
+2025-10-10 16:52:38,691 - __main__ - INFO - ⚠️  THROTTLING flow flow_000183 (192.168.101.26:65238 -> 10.0.217.214:53) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:38,842 - __main__ - INFO - ⚠️  THROTTLING flow flow_000184 (192.168.172.77:39667 -> 10.0.139.11:995) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:52:39,123 - __main__ - INFO - ⚠️  THROTTLING flow flow_000186 (192.168.9.110:32586 -> 10.0.212.47:443) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:39,270 - __main__ - INFO - ⚠️  THROTTLING flow flow_000187 (192.168.206.110:55875 -> 10.0.246.47:22) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:39,578 - __main__ - INFO - ⚠️  THROTTLING flow flow_000189 (192.168.84.110:63848 -> 10.0.216.227:25) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:39,726 - __main__ - INFO - ⚠️  THROTTLING flow flow_000190 (192.168.167.27:33362 -> 10.0.242.22:80) - Class: Non-Tor, Confidence: 0.424
+2025-10-10 16:52:39,890 - __main__ - WARNING - 🚫 BLOCKING flow flow_000191 (192.168.218.196:8064 -> 10.0.238.94:25) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.308
+2025-10-10 16:52:40,037 - __main__ - INFO - ⚠️  THROTTLING flow flow_000192 (192.168.168.227:43677 -> 10.0.150.15:993) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:40,179 - __main__ - WARNING - 🚫 BLOCKING flow flow_000193 (192.168.140.17:45787 -> 10.0.164.58:21) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.432
+2025-10-10 16:52:40,402 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:40] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:40,405 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:40] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:40,765 - __main__ - INFO - ⚠️  THROTTLING flow flow_000197 (192.168.24.214:50174 -> 10.0.2.29:443) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:41,474 - __main__ - WARNING - 🚫 BLOCKING flow flow_000202 (192.168.137.54:57360 -> 10.0.11.208:80) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.113
+2025-10-10 16:52:41,608 - __main__ - INFO - ⚠️  THROTTLING flow flow_000203 (192.168.98.249:9482 -> 10.0.170.209:53) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:41,758 - __main__ - INFO - ⚠️  THROTTLING flow flow_000204 (192.168.61.19:42187 -> 10.0.6.149:995) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:42,184 - __main__ - INFO - ⚠️  THROTTLING flow flow_000207 (192.168.170.20:19280 -> 10.0.96.246:53) - Class: Non-Tor, Confidence: 0.432
+2025-10-10 16:52:42,408 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:42] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:42,447 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:42] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:42,484 - __main__ - WARNING - 🚫 BLOCKING flow flow_000209 (192.168.247.126:63431 -> 10.0.186.247:22) - Class: Non-Tor, Confidence: 0.432, Anomaly: 0.687
+2025-10-10 16:52:42,623 - __main__ - INFO - ⚠️  THROTTLING flow flow_000210 (192.168.158.166:32392 -> 10.0.197.142:22) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:42,776 - __main__ - WARNING - 🚫 BLOCKING flow flow_000211 (192.168.144.60:8944 -> 10.0.35.143:53) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:42,913 - __main__ - INFO - ⚠️  THROTTLING flow flow_000212 (192.168.122.133:6778 -> 10.0.97.185:25) - Class: Non-Tor, Confidence: 0.444
+2025-10-10 16:52:43,064 - __main__ - INFO - ⚠️  THROTTLING flow flow_000213 (192.168.2.180:50936 -> 10.0.118.16:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:43,204 - __main__ - WARNING - 🚫 BLOCKING flow flow_000214 (192.168.253.38:43254 -> 10.0.187.190:53) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.616
+2025-10-10 16:52:43,338 - __main__ - INFO - ⚠️  THROTTLING flow flow_000215 (192.168.106.90:32081 -> 10.0.230.112:80) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:43,621 - __main__ - INFO - ⚠️  THROTTLING flow flow_000217 (192.168.202.86:40251 -> 10.0.158.29:25) - Class: Non-Tor, Confidence: 0.441
+2025-10-10 16:52:44,072 - __main__ - INFO - ⚠️  THROTTLING flow flow_000220 (192.168.181.3:43586 -> 10.0.50.3:995) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:44,790 - __main__ - INFO - ⚠️  THROTTLING flow flow_000225 (192.168.181.138:64568 -> 10.0.45.129:25) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:44,793 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:44] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:44,810 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:44] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:44,933 - __main__ - INFO - ⚠️  THROTTLING flow flow_000226 (192.168.212.163:56419 -> 10.0.8.42:443) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:45,208 - __main__ - INFO - ⚠️  THROTTLING flow flow_000228 (192.168.61.188:51511 -> 10.0.176.90:25) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:45,485 - __main__ - INFO - ⚠️  THROTTLING flow flow_000230 (192.168.3.152:4836 -> 10.0.217.193:25) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:45,631 - __main__ - WARNING - 🚫 BLOCKING flow flow_000231 (192.168.45.188:33067 -> 10.0.141.113:53) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.678
+2025-10-10 16:52:46,216 - __main__ - INFO - ⚠️  THROTTLING flow flow_000235 (192.168.29.169:63136 -> 10.0.87.216:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:46,653 - __main__ - INFO - ⚠️  THROTTLING flow flow_000238 (192.168.26.145:58923 -> 10.0.155.46:21) - Class: Non-Tor, Confidence: 0.440
+2025-10-10 16:52:46,785 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:46] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:46,787 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:46] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:46,791 - __main__ - INFO - ⚠️  THROTTLING flow flow_000239 (192.168.74.236:64410 -> 10.0.176.181:21) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:47,078 - __main__ - INFO - ⚠️  THROTTLING flow flow_000241 (192.168.86.141:3501 -> 10.0.83.253:995) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:52:47,215 - __main__ - WARNING - 🚫 BLOCKING flow flow_000242 (192.168.10.217:50610 -> 10.0.88.134:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.299
+2025-10-10 16:52:47,665 - __main__ - WARNING - 🚫 BLOCKING flow flow_000245 (192.168.187.1:53312 -> 10.0.76.222:53) - Class: Non-Tor, Confidence: 0.440, Anomaly: 0.699
+2025-10-10 16:52:47,806 - __main__ - INFO - ⚠️  THROTTLING flow flow_000246 (192.168.32.196:36174 -> 10.0.34.241:22) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:52:48,239 - __main__ - INFO - ⚠️  THROTTLING flow flow_000249 (192.168.203.12:7215 -> 10.0.6.154:80) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:48,388 - __main__ - WARNING - 🚫 BLOCKING flow flow_000250 (192.168.50.248:42759 -> 10.0.37.146:21) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.331
+2025-10-10 16:52:48,681 - __main__ - WARNING - 🚫 BLOCKING flow flow_000252 (192.168.223.10:38825 -> 10.0.73.73:21) - Class: Non-Tor, Confidence: 0.441, Anomaly: 0.755
+2025-10-10 16:52:48,762 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:48] "GET /api/recent_detections HTTP/1.1" 200 -
+2025-10-10 16:52:48,798 - werkzeug - INFO - 127.0.0.1 - - [10/Oct/2025 16:52:48] "GET /api/status HTTP/1.1" 200 -
+2025-10-10 16:52:48,983 - __main__ - WARNING - 🚫 BLOCKING flow flow_000254 (192.168.253.79:54011 -> 10.0.8.32:22) - Class: Non-Tor, Confidence: 0.439, Anomaly: 0.678
+2025-10-10 16:52:49,579 - __main__ - WARNING - 🚫 BLOCKING flow flow_000258 (192.168.179.10:30416 -> 10.0.182.134:21) - Class: Non-Tor, Confidence: 0.431, Anomaly: 0.685
+2025-10-10 16:52:50,011 - __main__ - WARNING - 🚫 BLOCKING flow flow_000261 (192.168.200.244:36561 -> 10.0.71.54:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.320
+2025-10-10 16:52:50,156 - __main__ - INFO - ⚠️  THROTTLING flow flow_000262 (192.168.105.3:61401 -> 10.0.85.74:443) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:50,446 - __main__ - INFO - ⚠️  THROTTLING flow flow_000264 (192.168.199.35:32495 -> 10.0.176.101:21) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:52:50,584 - __main__ - INFO - ⚠️  THROTTLING flow flow_000265 (192.168.31.6:19362 -> 10.0.108.104:993) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:51,750 - __main__ - INFO - ⚠️  THROTTLING flow flow_000273 (192.168.154.147:62100 -> 10.0.145.64:995) - Class: Non-Tor, Confidence: 0.439
+2025-10-10 16:52:52,179 - __main__ - WARNING - 🚫 BLOCKING flow flow_000276 (192.168.209.224:56624 -> 10.0.92.92:22) - Class: Non-Tor, Confidence: 0.423, Anomaly: 0.089
+2025-10-10 16:52:52,318 - __main__ - INFO - ⚠️  THROTTLING flow flow_000277 (192.168.139.192:19299 -> 10.0.238.65:53) - Class: Non-Tor, Confidence: 0.425
+2025-10-10 16:52:52,758 - __main__ - WARNING - 🚫 BLOCKING flow flow_000280 (192.168.165.50:58544 -> 10.0.10.186:21) - Class: Non-Tor, Confidence: 0.436, Anomaly: 0.073
+2025-10-10 16:52:53,184 - __main__ - INFO - ⚠️  THROTTLING flow flow_000283 (192.168.9.70:38174 -> 10.0.161.196:993) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:52:53,463 - __main__ - INFO - ⚠️  THROTTLING flow flow_000285 (192.168.176.183:63725 -> 10.0.146.242:443) - Class: Non-Tor, Confidence: 0.420
+2025-10-10 16:52:53,607 - __main__ - INFO - ⚠️  THROTTLING flow flow_000286 (192.168.149.136:2480 -> 10.0.136.182:443) - Class: Non-Tor, Confidence: 0.431
+2025-10-10 16:52:54,185 - __main__ - WARNING - 🚫 BLOCKING flow flow_000290 (192.168.102.22:9056 -> 10.0.163.122:995) - Class: VPN, Confidence: 0.385, Anomaly: 0.405
+2025-10-10 16:52:54,329 - __main__ - WARNING - 🚫 BLOCKING flow flow_000291 (192.168.159.150:5577 -> 10.0.121.252:995) - Class: Non-Tor, Confidence: 0.428, Anomaly: 0.034
+2025-10-10 16:52:54,460 - __main__ - WARNING - 🚫 BLOCKING flow flow_000292 (192.168.72.136:6257 -> 10.0.251.236:993) - Class: Non-Tor, Confidence: 0.340, Anomaly: 0.444
+2025-10-10 16:52:54,739 - __main__ - WARNING - 🚫 BLOCKING flow flow_000294 (192.168.188.177:47329 -> 10.0.22.64:80) - Class: Non-Tor, Confidence: 0.438, Anomaly: 2.592
+2025-10-10 16:52:54,877 - __main__ - INFO - ⚠️  THROTTLING flow flow_000295 (192.168.42.132:29860 -> 10.0.202.217:80) - Class: Non-Tor, Confidence: 0.421
+2025-10-10 16:52:55,164 - __main__ - INFO - ⚠️  THROTTLING flow flow_000297 (192.168.54.166:50734 -> 10.0.159.236:443) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:55,448 - __main__ - INFO - ⚠️  THROTTLING flow flow_000299 (192.168.71.175:23339 -> 10.0.131.80:53) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:56,040 - __main__ - INFO - ⚠️  THROTTLING flow flow_000303 (192.168.96.250:23440 -> 10.0.140.5:21) - Class: Non-Tor, Confidence: 0.435
+2025-10-10 16:52:56,181 - __main__ - INFO - ⚠️  THROTTLING flow flow_000304 (192.168.219.80:51732 -> 10.0.252.39:443) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:52:56,320 - __main__ - INFO - ⚠️  THROTTLING flow flow_000305 (192.168.147.58:33726 -> 10.0.36.122:80) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:56,754 - __main__ - INFO - ⚠️  THROTTLING flow flow_000308 (192.168.50.242:42705 -> 10.0.185.115:443) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:52:57,500 - __main__ - WARNING - 🚫 BLOCKING flow flow_000313 (192.168.117.243:26185 -> 10.0.198.75:22) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.068
+2025-10-10 16:52:57,644 - __main__ - WARNING - 🚫 BLOCKING flow flow_000314 (192.168.155.226:37636 -> 10.0.36.47:80) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.076
+2025-10-10 16:52:58,649 - __main__ - INFO - ⚠️  THROTTLING flow flow_000321 (192.168.115.13:51047 -> 10.0.170.202:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:52:58,777 - __main__ - WARNING - 🚫 BLOCKING flow flow_000322 (192.168.151.198:34798 -> 10.0.16.89:22) - Class: Non-Tor, Confidence: 0.430, Anomaly: 0.045
+2025-10-10 16:52:59,327 - __main__ - INFO - ⚠️  THROTTLING flow flow_000326 (192.168.228.13:2780 -> 10.0.89.218:25) - Class: Non-Tor, Confidence: 0.445
+2025-10-10 16:52:59,610 - __main__ - WARNING - 🚫 BLOCKING flow flow_000328 (192.168.129.96:42922 -> 10.0.140.133:443) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.070
+2025-10-10 16:53:00,645 - __main__ - WARNING - 🚫 BLOCKING flow flow_000335 (192.168.134.68:23220 -> 10.0.189.154:993) - Class: Non-Tor, Confidence: 0.438, Anomaly: 0.498
+2025-10-10 16:53:00,788 - __main__ - INFO - ⚠️  THROTTLING flow flow_000336 (192.168.133.189:39350 -> 10.0.125.217:993) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:53:01,080 - __main__ - INFO - ⚠️  THROTTLING flow flow_000338 (192.168.133.76:41515 -> 10.0.45.115:993) - Class: Non-Tor, Confidence: 0.425
+2025-10-10 16:53:01,227 - __main__ - INFO - ⚠️  THROTTLING flow flow_000339 (192.168.246.71:2867 -> 10.0.4.225:443) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:53:01,361 - __main__ - INFO - ⚠️  THROTTLING flow flow_000340 (192.168.42.154:44989 -> 10.0.231.148:993) - Class: Non-Tor, Confidence: 0.442
+2025-10-10 16:53:01,924 - __main__ - INFO - ⚠️  THROTTLING flow flow_000344 (192.168.165.2:33316 -> 10.0.43.62:53) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:53:02,071 - __main__ - INFO - ⚠️  THROTTLING flow flow_000345 (192.168.231.213:19180 -> 10.0.251.102:995) - Class: Non-Tor, Confidence: 0.426
+2025-10-10 16:53:02,218 - __main__ - WARNING - 🚫 BLOCKING flow flow_000346 (192.168.184.126:10081 -> 10.0.150.69:993) - Class: Non-Tor, Confidence: 0.430, Anomaly: 0.048
+2025-10-10 16:53:02,494 - __main__ - INFO - ⚠️  THROTTLING flow flow_000348 (192.168.98.192:46724 -> 10.0.160.132:22) - Class: Non-Tor, Confidence: 0.448
+2025-10-10 16:53:03,069 - __main__ - INFO - ⚠️  THROTTLING flow flow_000352 (192.168.112.100:58547 -> 10.0.25.139:80) - Class: Non-Tor, Confidence: 0.434
+2025-10-10 16:53:03,207 - __main__ - INFO - ⚠️  THROTTLING flow flow_000353 (192.168.225.186:62679 -> 10.0.185.121:53) - Class: Non-Tor, Confidence: 0.438
+2025-10-10 16:53:03,351 - __main__ - WARNING - 🚫 BLOCKING flow flow_000354 (192.168.11.119:65356 -> 10.0.144.61:993) - Class: Non-Tor, Confidence: 0.429, Anomaly: 0.033
+2025-10-10 16:53:03,493 - __main__ - INFO - ⚠️  THROTTLING flow flow_000355 (192.168.45.203:54457 -> 10.0.205.116:995) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:53:03,776 - __main__ - INFO - ⚠️  THROTTLING flow flow_000357 (192.168.233.53:28626 -> 10.0.251.136:993) - Class: Non-Tor, Confidence: 0.422
+2025-10-10 16:53:03,925 - __main__ - WARNING - 🚫 BLOCKING flow flow_000358 (192.168.60.189:40288 -> 10.0.158.202:22) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.068
+2025-10-10 16:53:04,070 - __main__ - INFO - ⚠️  THROTTLING flow flow_000359 (192.168.112.114:19963 -> 10.0.232.87:443) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:53:04,219 - __main__ - INFO - ⚠️  THROTTLING flow flow_000360 (192.168.187.16:13164 -> 10.0.207.60:25) - Class: Non-Tor, Confidence: 0.436
+2025-10-10 16:53:04,648 - __main__ - WARNING - 🚫 BLOCKING flow flow_000363 (192.168.29.190:15381 -> 10.0.176.127:22) - Class: Non-Tor, Confidence: 0.434, Anomaly: 0.095
+2025-10-10 16:53:05,100 - __main__ - INFO - ⚠️  THROTTLING flow flow_000366 (192.168.101.25:19329 -> 10.0.139.144:25) - Class: Non-Tor, Confidence: 0.447
+2025-10-10 16:53:06,133 - __main__ - INFO - ⚠️  THROTTLING flow flow_000373 (192.168.16.38:17112 -> 10.0.141.102:80) - Class: Non-Tor, Confidence: 0.443
+2025-10-10 16:53:06,431 - __main__ - INFO - ⚠️  THROTTLING flow flow_000375 (192.168.196.202:11412 -> 10.0.89.33:993) - Class: Non-Tor, Confidence: 0.444
+2025-10-10 16:53:06,848 - __main__ - INFO - ⚠️  THROTTLING flow flow_000378 (192.168.47.179:50397 -> 10.0.64.25:53) - Class: Non-Tor, Confidence: 0.429
+2025-10-10 16:53:06,983 - __main__ - INFO - ⚠️  THROTTLING flow flow_000379 (192.168.39.157:15411 -> 10.0.34.182:25) - Class: Non-Tor, Confidence: 0.437
+2025-10-10 16:53:07,275 - __main__ - INFO - ⚠️  THROTTLING flow flow_000381 (192.168.216.17:41361 -> 10.0.233.233:443) - Class: Non-Tor, Confidence: 0.448
+2025-10-10 16:53:07,850 - __main__ - WARNING - 🚫 BLOCKING flow flow_000385 (192.168.228.63:15021 -> 10.0.60.24:993) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.206
+2025-10-10 16:53:08,436 - __main__ - WARNING - 🚫 BLOCKING flow flow_000389 (192.168.16.209:45502 -> 10.0.113.168:80) - Class: Non-Tor, Confidence: 0.435, Anomaly: 0.118
+2025-10-10 16:53:08,723 - __main__ - INFO - ⚠️  THROTTLING flow flow_000391 (192.168.108.246:20668 -> 10.0.75.5:25) - Class: Non-Tor, Confidence: 0.428
+2025-10-10 16:53:09,005 - __main__ - INFO - ⚠️  THROTTLING flow flow_000393 (192.168.124.216:47794 -> 10.0.233.118:443) - Class: Non-Tor, Confidence: 0.430
+2025-10-10 16:53:09,277 - __main__ - WARNING - 🚫 BLOCKING flow flow_000395 (192.168.133.8:50738 -> 10.0.192.38:993) - Class: Non-Tor, Confidence: 0.415, Anomaly: 2.495
+2025-10-10 16:53:09,570 - __main__ - WARNING - 🚫 BLOCKING flow flow_000397 (192.168.94.5:40029 -> 10.0.234.78:993) - Class: Non-Tor, Confidence: 0.446, Anomaly: 0.092
+2025-10-10 16:53:10,010 - __main__ - INFO - ⚠️  THROTTLING flow flow_000400 (192.168.101.181:45225 -> 10.0.131.179:22) - Class: Non-Tor, Confidence: 0.448
+2025-10-10 16:53:10,580 - __main__ - WARNING - 🚫 BLOCKING flow flow_000404 (192.168.176.164:45050 -> 10.0.139.253:443) - Class: Non-Tor, Confidence: 0.430, Anomaly: 1.116
+2025-10-10 16:53:10,878 - __main__ - WARNING - 🚫 BLOCKING flow flow_000406 (192.168.71.3:8037 -> 10.0.250.36:22) - Class: Non-Tor, Confidence: 0.448, Anomaly: 0.098
+2025-10-10 16:53:11,322 - __main__ - WARNING - 🚫 BLOCKING flow flow_000409 (192.168.116.43:52294 -> 10.0.94.157:53) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.456
+2025-10-10 16:53:11,612 - __main__ - INFO - ⚠️  THROTTLING flow flow_000411 (192.168.178.188:22713 -> 10.0.68.97:25) - Class: Non-Tor, Confidence: 0.427
+2025-10-10 16:53:11,773 - __main__ - WARNING - 🚫 BLOCKING flow flow_000412 (192.168.96.239:50662 -> 10.0.73.17:80) - Class: Non-Tor, Confidence: 0.437, Anomaly: 0.239
+2025-10-10 16:53:11,914 - __main__ - INFO - ⚠️  THROTTLING flow flow_000413 (192.168.228.207:55478 -> 10.0.178.174:25) - Class: VPN, Confidence: 0.392
+2025-10-10 16:53:12,015 - __main__ - INFO - 🛑 Live detection system stopped
+2025-10-10 16:53:12,045 - __main__ - INFO - 💾 Detection results saved to logs/detection_results_20251010_165312.json
