@@ -35,7 +35,7 @@ class HybridNIDSModel:
     """
     
     def __init__(self,
-                 input_dim: int = 78,
+                 input_dim: int = 54,
                  ae_config: Dict[str, Any] = None,
                  capsnet_config: Dict[str, Any] = None,
                  rl_config: Dict[str, Any] = None,

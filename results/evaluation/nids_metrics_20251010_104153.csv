@@ -1,0 +1,19 @@
+Metric,Value,Type
+Accuracy,0.2643363815058542,Overall
+Precision (Weighted),0.3934929731881586,Overall
+Recall (Weighted),0.2643363815058542,Overall
+F1-Score (Weighted),0.3000591589943018,Overall
+Precision_Non-Tor,0.5948540194640715,Per-Class
+Recall_Non-Tor,0.3228186948343221,Per-Class
+F1-Score_Non-Tor,0.41851521830886834,Per-Class
+Precision_NonVPN,0.2066892145809846,Per-Class
+Recall_NonVPN,0.3464930701385972,Per-Class
+F1-Score_NonVPN,0.25892506865437426,Per-Class
+Precision_Tor,0.009345794392523364,Per-Class
+Recall_Tor,0.3148936170212766,Per-Class
+F1-Score_Tor,0.018152827180179076,Per-Class
+Precision_VPN,0.0,Per-Class
+Recall_VPN,0.0,Per-Class
+F1-Score_VPN,0.0,Per-Class
+Anomaly_ROC_AUC,0.6822215061221272,Anomaly Detection
+Anomaly_Avg_Precision,0.5340499077913148,Anomaly Detection

@@ -1,0 +1,3 @@
+Model,Accuracy,Macro F1-Score,Weighted F1-Score,Training Approach,Feature Learning,Improvement
+Separate Training (Baseline),0.2643,0.1815,0.3001,Sequential,Independent,Baseline
+Joint Training (Proposed),0.9482522861293906,0.9113245475033181,0.9480247554507497,Joint,Shared,+258.8%

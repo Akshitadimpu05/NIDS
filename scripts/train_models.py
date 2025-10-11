@@ -58,13 +58,8 @@ class NIDSTrainer:
             handle_missing=self.config['data']['handle_missing']
         )
         
-        self.model = HybridNIDSModel(
-            input_dim=len(self.config['data']['features']),
-            ae_config=self.config['autoencoder'],
-            capsnet_config=self.config['capsnet'],
-            rl_config=self.config['rl_agent'],
-            device=self.config['training']['device']
-        )
+        # Model will be initialized after data loading to get actual feature count
+        self.model = None
         
         # Training data
         self.train_data = None
@@ -127,6 +122,15 @@ class NIDSTrainer:
         logger.info(f"Data loaded - Train: {len(splits['X_train'])}, "
                    f"Val: {len(splits['X_val'])}, Test: {len(splits['X_test'])}")
         
+        # Initialize model with actual feature count
+        self.model = HybridNIDSModel(
+            input_dim=features.shape[1],
+            ae_config=self.config['autoencoder'],
+            capsnet_config=self.config['capsnet'],
+            rl_config=self.config['rl_agent'],
+            device=self.config['training']['device']
+        )
+        
         # Save preprocessor
         os.makedirs('data/models', exist_ok=True)
         self.preprocessor.save_preprocessor('data/models/preprocessor.pkl')
@@ -143,6 +147,19 @@ class NIDSTrainer:
     
     def train_autoencoder(self):
         """Train the autoencoder component."""
+        # Check if autoencoder is already trained
+        autoencoder_path = 'data/models/best_autoencoder.pth'
+        if os.path.exists(autoencoder_path):
+            logger.info(f"Found existing autoencoder at {autoencoder_path}")
+            try:
+                self.model.load_component('autoencoder', autoencoder_path)
+                self.model.is_trained['autoencoder'] = True
+                logger.info("✅ Loaded existing autoencoder, skipping training")
+                return
+            except Exception as e:
+                logger.warning(f"Failed to load existing autoencoder: {e}")
+                logger.info("Proceeding with fresh autoencoder training...")
+        
         logger.info("Starting autoencoder training...")
         
         # Create anomaly detection data (normal traffic only for AE training)
@@ -228,71 +245,95 @@ class NIDSTrainer:
             return self.val_data
     
     def evaluate_model(self):
-        """Evaluate the complete hybrid model."""
-        logger.info("Evaluating hybrid model...")
+        """Comprehensive model evaluation with detailed metrics."""
+        try:
+            from src.utils.evaluation import NIDSEvaluator
+        except ImportError:
+            # Fallback for different import contexts
+            import sys
+            import os
+            sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+            from src.utils.evaluation import NIDSEvaluator
         
-        # Evaluation metrics
-        total_samples = 0
-        correct_predictions = 0
-        anomaly_detection_tp = 0
-        anomaly_detection_fp = 0
-        anomaly_detection_tn = 0
-        anomaly_detection_fn = 0
+        logger.info("Starting comprehensive model evaluation...")
         
-        self.model.autoencoder.eval()
-        self.model.capsnet.eval()
+        if self.test_data is None:
+            logger.warning("No test data available for evaluation")
+            return {}
         
+        # Initialize evaluator
+        evaluator = NIDSEvaluator(class_names=['Non-Tor', 'NonVPN', 'Tor', 'VPN'])
+        
+        # Collect predictions and ground truth
+        y_true = []
+        y_pred = []
+        y_pred_proba = []
+        anomaly_scores = []
+        
+        self.model.eval()
         with torch.no_grad():
             for batch_features, batch_labels in self.test_data:
-                batch_size = len(batch_features)
-                total_samples += batch_size
+                batch_features = batch_features.to(self.model.device)
                 
-                # Test each sample
-                for i in range(batch_size):
-                    sample_features = batch_features[i:i+1]
-                    true_label = batch_labels[i].item()
-                    
-                    # Get model prediction
-                    result = self.model.predict(sample_features.numpy())
-                    
-                    # Evaluate anomaly detection
-                    is_anomaly = result['is_anomaly']
-                    true_anomaly = true_label != 0  # Assuming 0 is normal
-                    
-                    if is_anomaly and true_anomaly:
-                        anomaly_detection_tp += 1
-                    elif is_anomaly and not true_anomaly:
-                        anomaly_detection_fp += 1
-                    elif not is_anomaly and not true_anomaly:
-                        anomaly_detection_tn += 1
-                    else:
-                        anomaly_detection_fn += 1
-                    
-                    # Evaluate RL decision (simplified)
-                    action = result['action']
-                    if (true_anomaly and action in [1, 2]) or (not true_anomaly and action == 0):
-                        correct_predictions += 1
+                # Get model predictions
+                predictions = self.model.predict(batch_features.cpu().numpy())
+                
+                # Collect results
+                y_true.extend(batch_labels.cpu().numpy())
+                y_pred.extend([pred['action'] for pred in predictions])
+                
+                # Get probabilities if available
+                if 'action_probabilities' in predictions[0]:
+                    y_pred_proba.extend([pred['action_probabilities'] for pred in predictions])
+                
+                # Get anomaly scores
+                if 'anomaly_score' in predictions[0]:
+                    anomaly_scores.extend([pred['anomaly_score'] for pred in predictions])
         
-        # Calculate metrics
-        accuracy = correct_predictions / total_samples
+        # Convert to numpy arrays
+        y_true = np.array(y_true)
+        y_pred = np.array(y_pred)
         
-        precision = anomaly_detection_tp / (anomaly_detection_tp + anomaly_detection_fp) if (anomaly_detection_tp + anomaly_detection_fp) > 0 else 0
-        recall = anomaly_detection_tp / (anomaly_detection_tp + anomaly_detection_fn) if (anomaly_detection_tp + anomaly_detection_fn) > 0 else 0
-        f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+        # Classification evaluation
+        if len(y_pred_proba) > 0:
+            y_pred_proba = np.array(y_pred_proba)
+            cls_results = evaluator.evaluate_classification(y_true, y_pred, y_pred_proba)
+        else:
+            cls_results = evaluator.evaluate_classification(y_true, y_pred)
         
-        logger.info(f"Evaluation Results:")
-        logger.info(f"  Total samples: {total_samples}")
-        logger.info(f"  Overall accuracy: {accuracy:.4f}")
-        logger.info(f"  Anomaly detection precision: {precision:.4f}")
-        logger.info(f"  Anomaly detection recall: {recall:.4f}")
-        logger.info(f"  Anomaly detection F1-score: {f1_score:.4f}")
+        # Anomaly detection evaluation (if we have anomaly scores)
+        if len(anomaly_scores) > 0:
+            # Convert labels to binary (assume Non-Tor is normal, others are anomalies)
+            y_true_anomaly = (y_true != 0).astype(int)  # Non-Tor=0, others=1
+            anomaly_scores = np.array(anomaly_scores)
+            anom_results = evaluator.evaluate_anomaly_detection(y_true_anomaly, anomaly_scores)
+        
+        # Generate comprehensive report
+        results_dir = "results/evaluation"
+        report_files = evaluator.generate_report(results_dir)
+        
+        # Print summary metrics
+        logger.info("=== EVALUATION RESULTS ===")
+        logger.info(f"Accuracy: {cls_results['accuracy']:.4f}")
+        logger.info(f"Precision (Weighted): {cls_results['precision_weighted']:.4f}")
+        logger.info(f"Recall (Weighted): {cls_results['recall_weighted']:.4f}")
+        logger.info(f"F1-Score (Weighted): {cls_results['f1_weighted']:.4f}")
+        
+        if 'roc_auc' in cls_results:
+            logger.info(f"ROC AUC (Micro): {cls_results['roc_auc']['micro']:.4f}")
+            logger.info(f"ROC AUC (Macro): {cls_results['roc_auc']['macro']:.4f}")
+        
+        if len(anomaly_scores) > 0:
+            logger.info(f"Anomaly Detection AUC: {anom_results['anomaly_roc_auc']:.4f}")
+        
+        logger.info("=== REPORT FILES ===")
+        for report_type, filepath in report_files.items():
+            logger.info(f"{report_type}: {filepath}")
         
         return {
-            'accuracy': accuracy,
-            'precision': precision,
-            'recall': recall,
-            'f1_score': f1_score,
-            'total_samples': total_samples
+            'classification': cls_results,
+            'anomaly_detection': anom_results if len(anomaly_scores) > 0 else None,
+            'report_files': report_files
         }
     
     def save_model(self, model_path: str):

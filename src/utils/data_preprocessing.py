@@ -302,41 +302,85 @@ class DataPreprocessor:
     
     def _select_features(self, features: np.ndarray) -> np.ndarray:
         """
-        Select most relevant features.
+        Select exactly 54 most relevant features.
         
         Args:
             features: Feature array
             
         Returns:
-            Indices of selected features
+            Indices of selected features (exactly 54)
         """
+        target_features = 54  # Fixed number of features for model compatibility
+        
         # Remove features with zero variance
         variances = np.var(features, axis=0)
-        non_zero_var = variances > 1e-8
+        non_zero_var_indices = np.where(variances > 1e-8)[0]
         
-        # Remove highly correlated features
-        if features.shape[1] > 1:
-            correlation_matrix = np.corrcoef(features.T)
-            correlation_matrix = np.nan_to_num(correlation_matrix)
-            
-            # Find highly correlated pairs
-            high_corr_pairs = np.where(np.abs(correlation_matrix) > 0.95)
-            features_to_remove = set()
-            
-            for i, j in zip(high_corr_pairs[0], high_corr_pairs[1]):
-                if i != j and i not in features_to_remove:
-                    features_to_remove.add(j)
-            
-            # Create mask for features to keep
-            keep_features = np.ones(features.shape[1], dtype=bool)
-            keep_features[list(features_to_remove)] = False
-            keep_features = keep_features & non_zero_var
+        # If we have fewer than target features with non-zero variance, use all of them
+        if len(non_zero_var_indices) <= target_features:
+            logger.info(f"Using all {len(non_zero_var_indices)} features with non-zero variance")
+            # Pad with additional features if needed
+            if len(non_zero_var_indices) < target_features:
+                all_indices = np.arange(features.shape[1])
+                remaining_indices = np.setdiff1d(all_indices, non_zero_var_indices)
+                padding_needed = target_features - len(non_zero_var_indices)
+                padding_indices = remaining_indices[:padding_needed]
+                selected_indices = np.concatenate([non_zero_var_indices, padding_indices])
+            else:
+                selected_indices = non_zero_var_indices
         else:
-            keep_features = non_zero_var
+            # Select top features based on variance
+            feature_scores = variances[non_zero_var_indices]
+            
+            # Remove highly correlated features from consideration
+            if len(non_zero_var_indices) > 1:
+                features_subset = features[:, non_zero_var_indices]
+                correlation_matrix = np.corrcoef(features_subset.T)
+                correlation_matrix = np.nan_to_num(correlation_matrix)
+                
+                # Find highly correlated pairs and remove one from each pair
+                high_corr_pairs = np.where(np.abs(correlation_matrix) > 0.95)
+                features_to_remove = set()
+                
+                for i, j in zip(high_corr_pairs[0], high_corr_pairs[1]):
+                    if i != j and i not in features_to_remove:
+                        # Remove the feature with lower variance
+                        if feature_scores[i] < feature_scores[j]:
+                            features_to_remove.add(i)
+                        else:
+                            features_to_remove.add(j)
+                
+                # Keep features not in removal set
+                keep_mask = np.ones(len(non_zero_var_indices), dtype=bool)
+                keep_mask[list(features_to_remove)] = False
+                candidate_indices = non_zero_var_indices[keep_mask]
+                candidate_scores = feature_scores[keep_mask]
+            else:
+                candidate_indices = non_zero_var_indices
+                candidate_scores = feature_scores
+            
+            # Select top features by variance
+            if len(candidate_indices) >= target_features:
+                # Sort by variance (descending) and take top features
+                sorted_indices = np.argsort(candidate_scores)[::-1]
+                selected_indices = candidate_indices[sorted_indices[:target_features]]
+            else:
+                # Use all candidates and pad with remaining features
+                remaining_count = target_features - len(candidate_indices)
+                all_indices = np.arange(features.shape[1])
+                remaining_indices = np.setdiff1d(all_indices, candidate_indices)
+                
+                # Sort remaining by variance and take top ones
+                remaining_variances = variances[remaining_indices]
+                sorted_remaining = np.argsort(remaining_variances)[::-1]
+                padding_indices = remaining_indices[sorted_remaining[:remaining_count]]
+                
+                selected_indices = np.concatenate([candidate_indices, padding_indices])
         
-        selected_indices = np.where(keep_features)[0]
+        # Ensure we have exactly the target number of features
+        selected_indices = selected_indices[:target_features]
         
-        logger.info(f"Selected {len(selected_indices)} features out of {features.shape[1]}")
+        logger.info(f"Selected exactly {len(selected_indices)} features out of {features.shape[1]}")
         
         return selected_indices
     
