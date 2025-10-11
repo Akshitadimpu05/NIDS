@@ -62,7 +62,7 @@ class FogNode:
         self.is_running = False
         
         # Initialize components
-        self.model = None
+        self.joint_model = None
         self.traffic_capture = None
         self.mitigation = None
         self.orchestrator_client = None
@@ -94,9 +94,9 @@ class FogNode:
     async def initialize(self):
         """Initialize all fog node components."""
         try:
-            # Initialize hybrid model
-            logger.info("Initializing hybrid NIDS model...")
-            self.model = HybridNIDSModel(device='cpu')  # Use CPU for fog deployment
+            # Initialize joint model
+            logger.info("Initializing NIDS model...")
+            self._load_joint_model()
             
             # Initialize traffic capture
             logger.info("Initializing traffic capture...")
@@ -138,7 +138,7 @@ class FogNode:
                 'max_queue_size': self.config.max_queue_size,
                 'mitigation_enabled': self.config.enable_mitigation
             },
-            'model_info': self.model.get_model_info() if self.model else None,
+            'model_info': self.joint_model.get_model_info() if self.joint_model else None,
             'timestamp': time.time()
         }
         
@@ -307,8 +307,8 @@ class FogNode:
             if isinstance(features, list):
                 features = np.array(features, dtype=np.float32)
             
-            # Make prediction using hybrid model
-            result = self.model.predict(features, deterministic=True)
+            # Make prediction using joint model
+            result = self.joint_model.predict(features, deterministic=True)
             
             # Update statistics
             self.stats['decisions_made'] += 1
@@ -398,7 +398,7 @@ class FogNode:
         try:
             # Save current model as backup
             backup_path = f"data/models/backup_{self.node_id}_{int(time.time())}.pth"
-            self.model.save_model(backup_path)
+            self.joint_model.save_model(backup_path)
             
             # Apply update based on type
             update_type = model_data.get('type', 'full')
@@ -406,7 +406,7 @@ class FogNode:
             if update_type == 'full':
                 # Full model replacement
                 model_path = model_data['model_path']
-                self.model.load_model(model_path)
+                self.joint_model.load_model(model_path)
                 
             elif update_type == 'weights':
                 # Weight updates only
@@ -416,7 +416,7 @@ class FogNode:
             elif update_type == 'rl_policy':
                 # RL policy update only
                 policy_data = model_data['policy_data']
-                self.model.rl_agent.load_model(policy_data)
+                self.joint_model.rl_agent.load_model(policy_data)
             
             logger.info(f"Applied {update_type} model update")
             
@@ -428,13 +428,13 @@ class FogNode:
         """Update specific model weights."""
         try:
             if 'autoencoder' in weights:
-                self.model.autoencoder.load_state_dict(weights['autoencoder'])
+                self.joint_model.autoencoder.load_state_dict(weights['autoencoder'])
             
             if 'capsnet' in weights:
-                self.model.capsnet.load_state_dict(weights['capsnet'])
+                self.joint_model.capsnet.load_state_dict(weights['capsnet'])
             
             if 'rl_agent' in weights:
-                self.model.rl_agent.network.load_state_dict(weights['rl_agent'])
+                self.joint_model.rl_agent.network.load_state_dict(weights['rl_agent'])
                 
         except Exception as e:
             logger.error(f"Failed to update model weights: {e}")
@@ -509,7 +509,7 @@ class FogNode:
             },
             'model': {
                 'updates_received': self.stats['model_updates'],
-                'model_info': self.model.get_model_info() if self.model else None
+                'model_info': self.joint_model.get_model_info() if self.joint_model else None
             }
         }
         
@@ -529,6 +529,89 @@ class FogNode:
                 'mitigation_enabled': self.config.enable_mitigation
             }
         }
+    
+    def _load_joint_model(self):
+        """Load joint-trained NIDS model."""
+        try:
+            # Import joint model
+            import sys
+            sys.path.append('/app')
+            from joint_training import JointNIDSModel
+            from src.agents.ppo_agent import PPOAgent
+            from src.utils.data_preprocessing import DataPreprocessor
+            import yaml
+            import os
+            
+            # Load model configuration
+            config_path = '/app/config/docker_config.yaml'
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config = yaml.safe_load(f)
+            else:
+                # Fallback configuration
+                config = {
+                    'autoencoder': {'hidden_dims': [32, 16], 'latent_dim': 4, 'dropout_rate': 0.2},
+                    'capsnet': {'primary_caps_dim': 8, 'primary_caps_num': 32, 'digit_caps_dim': 16, 'digit_caps_num': 4, 'routing_iterations': 3},
+                    'rl_agent': {'lr': 3e-4, 'gamma': 0.99, 'eps_clip': 0.2, 'k_epochs': 4}
+                }
+            
+            # Initialize joint model
+            logger.info("Loading joint NIDS model...")
+            self.joint_model = JointNIDSModel(54, config['autoencoder'], config['capsnet'])
+            
+            # Load trained weights
+            model_path = '/app/data/models/docker_hybrid_model.pth'
+            if os.path.exists(model_path):
+                checkpoint = torch.load(model_path, map_location='cpu')
+                
+                # Create joint model state dict from separate components
+                joint_state = {}
+                
+                # Add autoencoder weights
+                for key, value in checkpoint['autoencoder_state_dict'].items():
+                    joint_state[f'autoencoder.{key}'] = value
+                
+                # Add CapsNet weights
+                for key, value in checkpoint['capsnet_state_dict'].items():
+                    joint_state[f'capsnet.{key}'] = value
+                
+                self.joint_model.load_state_dict(joint_state)
+                self.joint_model.eval()
+                
+                # Load RL agent
+                logger.info("Loading RL agent...")
+                self.rl_agent = PPOAgent(
+                    state_dim=8,  # 4D autoencoder + 4D capsnet
+                    action_dim=3,
+                    **{k: v for k, v in config['rl_agent'].items() if k in ['lr', 'gamma', 'eps_clip', 'k_epochs']}
+                )
+                
+                # Load RL agent weights
+                if 'rl_agent_checkpoint' in checkpoint:
+                    self.rl_agent.network.load_state_dict(checkpoint['rl_agent_checkpoint']['network_state_dict'])
+                    self.rl_agent.optimizer.load_state_dict(checkpoint['rl_agent_checkpoint']['optimizer_state_dict'])
+                
+                # Load preprocessor
+                preprocessor_path = '/app/data/models/joint_preprocessor.pkl'
+                if os.path.exists(preprocessor_path):
+                    self.preprocessor = DataPreprocessor()
+                    self.preprocessor.load_preprocessor(preprocessor_path)
+                    logger.info("✅ Preprocessor loaded successfully")
+                else:
+                    logger.warning("Preprocessor not found, using default")
+                    self.preprocessor = DataPreprocessor()
+                
+                logger.info("✅ Joint NIDS model loaded successfully")
+                return True
+            else:
+                logger.error(f"Model file not found: {model_path}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Failed to load joint model: {e}")
+            import traceback
+            traceback.print_exc()
+            return False
 
 
 # Utility function for easy fog node deployment
