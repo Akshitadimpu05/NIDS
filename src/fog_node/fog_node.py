@@ -363,17 +363,21 @@ class FogNode:
         """Run model updates in dedicated thread."""
         logger.info("Starting model update thread")
         
+        # Create a new event loop for this thread
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
         try:
             while not self.stop_event.is_set():
                 try:
                     # Check for model updates from orchestrator
-                    update_available = asyncio.run(
+                    update_available = loop.run_until_complete(
                         self.orchestrator_client.check_model_update()
                     )
                     
                     if update_available:
                         logger.info("Model update available, downloading...")
-                        model_data = asyncio.run(
+                        model_data = loop.run_until_complete(
                             self.orchestrator_client.download_model_update()
                         )
                         
@@ -391,6 +395,7 @@ class FogNode:
         except Exception as e:
             logger.error(f"Model update thread error: {e}")
         finally:
+            loop.close()
             logger.info("Model update thread stopped")
     
     def _apply_model_update(self, model_data: Dict[str, Any]):
@@ -444,6 +449,10 @@ class FogNode:
         """Run metrics reporting in dedicated thread."""
         logger.info("Starting metrics reporting thread")
         
+        # Create a new event loop for this thread
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
         try:
             while not self.stop_event.is_set():
                 try:
@@ -451,7 +460,7 @@ class FogNode:
                     metrics = self._collect_metrics()
                     
                     # Send to orchestrator
-                    asyncio.run(
+                    loop.run_until_complete(
                         self.orchestrator_client.report_metrics(metrics)
                     )
                     
@@ -467,6 +476,7 @@ class FogNode:
         except Exception as e:
             logger.error(f"Metrics reporting thread error: {e}")
         finally:
+            loop.close()
             logger.info("Metrics reporting thread stopped")
     
     def _collect_metrics(self) -> Dict[str, Any]:
