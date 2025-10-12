@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Script to run the Central Orchestrator.
+Portable version that works in any environment.
 """
 
 import os
@@ -10,10 +11,34 @@ import asyncio
 import uvicorn
 from pathlib import Path
 
-# Add src to Python path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+# Add multiple paths to ensure imports work in both Docker and local
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(project_root / "src"))
+sys.path.insert(0, "/app")  # Docker fallback
+sys.path.insert(0, "/app/src")  # Docker fallback
 
-from orchestrator.api_server import create_api_server
+# Debug: Print paths to verify
+print(f"🔍 Python paths:")
+for p in sys.path[:5]:
+    print(f"  - {p}")
+
+# Try importing with detailed error messages
+try:
+    from orchestrator.api_server import create_api_server
+    print("✅ Successfully imported orchestrator.api_server")
+except ImportError as e:
+    print(f"❌ Failed to import orchestrator.api_server: {e}")
+    print(f"📁 Looking for: {project_root / 'src' / 'orchestrator' / 'api_server.py'}")
+    print(f"📁 File exists: {(project_root / 'src' / 'orchestrator' / 'api_server.py').exists()}")
+    
+    # Try alternative import
+    try:
+        from src.orchestrator.api_server import create_api_server
+        print("✅ Successfully imported via src.orchestrator.api_server")
+    except ImportError as e2:
+        print(f"❌ Alternative import also failed: {e2}")
+        sys.exit(1)
 
 # Configure logging
 logging.basicConfig(
@@ -35,7 +60,7 @@ def main():
     port = int(os.getenv('ORCHESTRATOR_PORT', '8000'))
     log_level = os.getenv('LOG_LEVEL', 'info').lower()
     
-    logger.info(f"Starting NIDS Central Orchestrator on {host}:{port}")
+    logger.info(f"🚀 Starting NIDS Central Orchestrator on {host}:{port}")
     
     # Create FastAPI app
     app = create_api_server()
