@@ -4,16 +4,20 @@ FROM python:3.9-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies including execstack to fix PyTorch issue
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     curl \
+    execstack \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy minimal requirements and install Python dependencies
 COPY docker/requirements-docker.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Fix PyTorch libtorch_cpu.so executable stack issue
+RUN find /usr/local/lib/python3.9/site-packages/torch/lib -name "*.so*" -exec execstack -c {} \; 2>/dev/null || true
 
 # Copy source code
 COPY src/ ./src/

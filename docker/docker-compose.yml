@@ -19,6 +19,8 @@ services:
     networks:
       - nids-network
     restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -47,6 +49,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN  # Required for traffic capture
+    security_opt:
+      - seccomp:unconfined
     privileged: false
 
   # Fog Node 2
@@ -71,6 +75,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
     privileged: false
 
   # Fog Node 3
@@ -95,6 +101,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
     privileged: false
 
   # Traffic Generator (for testing)
