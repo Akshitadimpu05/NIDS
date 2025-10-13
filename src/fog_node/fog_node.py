@@ -14,11 +14,21 @@ from queue import Queue, Empty
 import numpy as np
 import torch
 
-from ..models.ensemble import HybridNIDSModel
+# Use absolute imports instead of relative imports
+try:
+    from models.ensemble import HybridNIDSModel
+except ImportError:
+    from src.models.ensemble import HybridNIDSModel
+
 from .traffic_capture import TrafficCapture
 from .mitigation import TrafficMitigation
-from ..utils.communication import OrchestratorClient
-from ..utils.metrics import MetricsCollector
+
+try:
+    from utils.communication import OrchestratorClient
+    from utils.metrics import MetricsCollector
+except ImportError:
+    from src.utils.communication import OrchestratorClient
+    from src.utils.metrics import MetricsCollector
 
 logger = logging.getLogger(__name__)
 

@@ -27,7 +27,7 @@ COPY scripts/ ./scripts/
 COPY data/models/ ./data/models/
 
 # Create necessary directories
-RUN mkdir -p data/logs
+RUN mkdir -p data/logs logs
 
 # Set environment variables
 ENV PYTHONPATH=/app:/app/src
