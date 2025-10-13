@@ -5,6 +5,9 @@
 torch==1.13.1
 numpy==1.23.5
 
+# Reinforcement Learning
+gymnasium==0.29.1
+
 # Web Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
