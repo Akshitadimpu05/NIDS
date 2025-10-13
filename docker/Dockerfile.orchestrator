@@ -20,6 +20,7 @@ COPY src/ ./src/
 COPY config/ ./config/
 COPY scripts/ ./scripts/
 COPY data/models/ ./data/models/
+COPY joint_training.py ./
 
 # Create necessary directories
 RUN mkdir -p data/logs logs
