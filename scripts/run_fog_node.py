@@ -82,9 +82,9 @@ async def run_fog_node():
         logger.info(f"⚙️ Initializing fog node {node_id}...")
         await fog_node.initialize()
         
-        # Start fog node
+        # Start fog node (not async, don't await)
         logger.info(f"▶️ Starting fog node {node_id}...")
-        await fog_node.start()
+        fog_node.start()
         
         logger.info(f"✅ Fog node {node_id} is running")
         
