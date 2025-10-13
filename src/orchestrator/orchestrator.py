@@ -13,7 +13,12 @@ import json
 import threading
 
 from .model_aggregator import ModelAggregator
-from ..models.ensemble import HybridNIDSModel
+
+# Use absolute import instead of relative import
+try:
+    from models.ensemble import HybridNIDSModel
+except ImportError:
+    from src.models.ensemble import HybridNIDSModel
 
 logger = logging.getLogger(__name__)
 

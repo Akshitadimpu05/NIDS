@@ -10,7 +10,11 @@ from typing import Dict, Any, List, Optional, Tuple
 from collections import defaultdict
 import copy
 
-from ..models.ensemble import HybridNIDSModel
+# Use absolute import instead of relative import
+try:
+    from models.ensemble import HybridNIDSModel
+except ImportError:
+    from src.models.ensemble import HybridNIDSModel
 
 logger = logging.getLogger(__name__)
 
