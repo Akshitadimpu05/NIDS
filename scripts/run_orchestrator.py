@@ -40,14 +40,25 @@ except ImportError as e:
         print(f"❌ Alternative import also failed: {e2}")
         sys.exit(1)
 
+# Create logs directory if it doesn't exist
+log_dir = Path('logs')
+try:
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / 'orchestrator.log'
+    handlers = [
+        logging.StreamHandler(),
+        logging.FileHandler(str(log_file))
+    ]
+except (PermissionError, OSError) as e:
+    print(f"⚠️ Could not create log file: {e}")
+    print("   Using console logging only")
+    handlers = [logging.StreamHandler()]
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('logs/orchestrator.log')
-    ]
+    handlers=handlers
 )
 
 logger = logging.getLogger(__name__)
