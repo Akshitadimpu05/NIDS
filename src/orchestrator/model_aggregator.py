@@ -10,7 +10,14 @@ from typing import Dict, Any, List, Optional, Tuple
 from collections import defaultdict
 import copy
 
-from ..models.ensemble import HybridNIDSModel
+# Import with fallback for Docker
+try:
+    from models.ensemble import HybridNIDSModel
+except ImportError:
+    try:
+        from src.models.ensemble import HybridNIDSModel
+    except ImportError:
+        from ..models.ensemble import HybridNIDSModel
 
 logger = logging.getLogger(__name__)
 

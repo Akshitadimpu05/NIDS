@@ -12,7 +12,13 @@ from collections import defaultdict
 import json
 import threading
 
-from .model_aggregator import ModelAggregator
+try:
+    from orchestrator.model_aggregator import ModelAggregator
+except ImportError:
+    try:
+        from src.orchestrator.model_aggregator import ModelAggregator
+    except ImportError:
+        from .model_aggregator import ModelAggregator
 from ..models.ensemble import HybridNIDSModel
 
 logger = logging.getLogger(__name__)

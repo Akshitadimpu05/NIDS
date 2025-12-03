@@ -3,7 +3,7 @@ FastAPI server for the Central Orchestrator.
 Provides REST API endpoints for fog node communication.
 """
 
-from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
@@ -112,6 +112,36 @@ def create_api_server() -> FastAPI:
             raise HTTPException(status_code=503, detail="Orchestrator not running")
         
         return {"status": "healthy", "timestamp": asyncio.get_event_loop().time()}
+    
+    @app.get("/metrics")
+    async def metrics():
+        """Prometheus metrics endpoint."""
+        if not orchestrator:
+            return Response(content="# Orchestrator not available\n", media_type="text/plain")
+        
+        try:
+            # Get metrics from orchestrator
+            metrics_data = orchestrator.get_metrics()
+            
+            # Format as Prometheus metrics
+            metrics_text = "# HELP nids_fog_nodes_total Total number of registered fog nodes\n"
+            metrics_text += "# TYPE nids_fog_nodes_total gauge\n"
+            metrics_text += f"nids_fog_nodes_total {len(metrics_data.get('nodes', {}))}\n\n"
+            
+            metrics_text += "# HELP nids_fog_nodes_active Number of active fog nodes\n"
+            metrics_text += "# TYPE nids_fog_nodes_active gauge\n"
+            active_nodes = sum(1 for node in metrics_data.get('nodes', {}).values() if node.get('status') == 'active')
+            metrics_text += f"nids_fog_nodes_active {active_nodes}\n\n"
+            
+            metrics_text += "# HELP nids_total_flows_processed Total network flows processed\n"
+            metrics_text += "# TYPE nids_total_flows_processed counter\n"
+            total_flows = sum(node.get('metrics', {}).get('packets_processed', 0) for node in metrics_data.get('nodes', {}).values())
+            metrics_text += f"nids_total_flows_processed {total_flows}\n\n"
+            
+            return Response(content=metrics_text, media_type="text/plain")
+        except Exception as e:
+            logger.error(f"Metrics error: {e}")
+            return Response(content=f"# Error: {e}\n", media_type="text/plain")
     
     @app.post("/api/nodes/register")
     async def register_node(registration: NodeRegistration):

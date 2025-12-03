@@ -1,0 +1,46 @@
+autoencoder:
+  batch_size: 256
+  dropout_rate: 0.2
+  epochs: 100
+  hidden_dims:
+  - 64
+  - 32
+  - 16
+  - 8
+  input_dim: 54
+  latent_dim: 4
+  learning_rate: 0.001
+  reconstruction_threshold: 0.1
+capsnet:
+  batch_size: 128
+  digit_caps_dim: 16
+  digit_caps_num: 4
+  epochs: 50
+  input_dim: 54
+  learning_rate: 0.001
+  primary_caps_dim: 8
+  primary_caps_num: 32
+  routing_iterations: 3
+fog_node:
+  batch_size: 32
+  enable_mitigation: true
+  max_queue_size: 10000
+  processing_threads: 4
+model:
+  input_dim: 54
+  model_path: /app/data/models/docker_hybrid_model.pth
+  preprocessor_path: /app/data/models/joint_preprocessor.pkl
+  type: joint_nids
+rl_agent:
+  action_dim: 3
+  algorithm: PPO
+  batch_size: 64
+  buffer_size: 100000
+  epsilon: 0.1
+  gamma: 0.99
+  hidden_dims:
+  - 128
+  - 64
+  learning_rate: 0.0003
+  state_dim: 12
+  update_frequency: 1000

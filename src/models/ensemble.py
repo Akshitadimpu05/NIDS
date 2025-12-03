@@ -9,8 +9,20 @@ import numpy as np
 from typing import Dict, Tuple, Any, Optional
 import logging
 
-from .autoencoder import TrafficAutoencoder
-from .capsnet import CapsuleNetwork
+try:
+    from models.autoencoder import TrafficAutoencoder
+except ImportError:
+    try:
+        from src.models.autoencoder import TrafficAutoencoder
+    except ImportError:
+        from .autoencoder import TrafficAutoencoder
+try:
+    from models.capsnet import CapsuleNetwork
+except ImportError:
+    try:
+        from src.models.capsnet import CapsuleNetwork
+    except ImportError:
+        from .capsnet import CapsuleNetwork
 
 # Use absolute imports to avoid relative import issues
 try:

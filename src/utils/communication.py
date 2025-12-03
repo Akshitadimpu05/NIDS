@@ -40,17 +40,37 @@ class OrchestratorClient:
         
         # Session for connection pooling
         self.session = None
+        self._session_lock = asyncio.Lock() if self._has_running_loop() else None
         
         # Connection state
         self.is_connected = False
         self.last_heartbeat = 0
         
+    def _has_running_loop(self) -> bool:
+        """Check if there's a running event loop."""
+        try:
+            asyncio.get_running_loop()
+            return True
+        except RuntimeError:
+            return False
+    
     async def _get_session(self) -> aiohttp.ClientSession:
-        """Get or create HTTP session."""
-        if self.session is None or self.session.closed:
-            timeout = aiohttp.ClientTimeout(total=self.timeout)
-            self.session = aiohttp.ClientSession(timeout=timeout)
-        return self.session
+        """Get or create HTTP session with proper event loop handling."""
+        # Ensure we have a lock
+        if self._session_lock is None:
+            self._session_lock = asyncio.Lock()
+        
+        async with self._session_lock:
+            # Check if session exists and is not closed
+            if self.session is None or self.session.closed:
+                try:
+                    timeout = aiohttp.ClientTimeout(total=self.timeout)
+                    self.session = aiohttp.ClientSession(timeout=timeout)
+                    logger.debug(f"Created new aiohttp session for node {self.node_id}")
+                except Exception as e:
+                    logger.error(f"Failed to create session: {e}")
+                    raise
+            return self.session
     
     async def _make_request(self, 
                            method: str, 
@@ -92,12 +112,17 @@ class OrchestratorClient:
                         self.is_connected = True
                         return result
                     else:
-                        logger.warning(f"Request failed with status {response.status}: {await response.text()}")
+                        logger.warning(f"Request failed with status {response.status}")
                         
             except asyncio.TimeoutError:
                 logger.warning(f"Request timeout (attempt {attempt + 1}/{self.retry_attempts})")
             except aiohttp.ClientError as e:
                 logger.warning(f"Client error (attempt {attempt + 1}/{self.retry_attempts}): {e}")
+            except RuntimeError as e:
+                if "Event loop is closed" in str(e):
+                    logger.error(f"Event loop closed, cannot make request")
+                    return None
+                logger.error(f"Runtime error (attempt {attempt + 1}/{self.retry_attempts}): {e}")
             except Exception as e:
                 logger.error(f"Unexpected error (attempt {attempt + 1}/{self.retry_attempts}): {e}")
             
@@ -286,8 +311,13 @@ class OrchestratorClient:
     async def close(self):
         """Close the client session."""
         if self.session and not self.session.closed:
-            await self.session.close()
-            self.session = None
+            try:
+                await self.session.close()
+                logger.debug(f"Closed aiohttp session for node {self.node_id}")
+            except Exception as e:
+                logger.warning(f"Error closing session: {e}")
+            finally:
+                self.session = None
 
 
 class MessageQueue:
